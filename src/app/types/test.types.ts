@@ -4,6 +4,10 @@ export type TwoMultipleChoiceKeys = 'A' | 'B';
 export type FourMultipleChoiceKeys = TwoMultipleChoiceKeys | 'C' | 'D';
 export type FiveMultipleChoiceKeys = FourMultipleChoiceKeys | 'E';
 
+export type TwoMultipleChoiceResponses = {[key in TwoMultipleChoiceKeys]: string};
+export type FourMultipleChoiceResponses = {[key in FourMultipleChoiceKeys]: string};
+export type FiveMultipleChoiceResponses = {[key in FiveMultipleChoiceKeys]: string};
+
 export type TrueFalseAnswer = boolean | undefined;
 export type FiveScaleAnswer = FiveScaleChoice | undefined;
 export type TwoMultipleChoiceAnswer = TwoMultipleChoiceKeys | undefined;
@@ -21,15 +25,15 @@ export interface FiveScaleQuestion extends Question {
   response: FiveScaleAnswer
 }
 export interface TwoMultipleChoiceQuestion extends Question {
-  responses: {[key in TwoMultipleChoiceKeys]: string},
+  responses: TwoMultipleChoiceResponses,
   response: TwoMultipleChoiceAnswer
 }
 export interface FourMultipleChoiceQuestion extends Question {
-  responses: {[key in FourMultipleChoiceKeys]: string},
+  responses: FourMultipleChoiceResponses,
   response: FourMultipleChoiceAnswer
 }
 export interface FiveMultipleChoiceQuestion extends Question {
-  responses: {[key in FiveMultipleChoiceKeys]: string},
+  responses: FiveMultipleChoiceResponses,
   response: FiveMultipleChoiceAnswer
 }
 
