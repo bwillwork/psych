@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {routes} from './app.routes';
 import {NavData} from './types/nav.types';

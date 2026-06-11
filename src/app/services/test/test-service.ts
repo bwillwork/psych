@@ -3,4 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class TestService {}
+export class TestService {
+
+  public canViewResults(): boolean {
+    return true;
+  }
+}
