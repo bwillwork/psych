@@ -27,7 +27,9 @@ export interface FiveMultipleChoiceQuestion extends Question {
 }
 
 
-export interface TestService<Q> {
+export interface QuestionScoreService<Q> {
+  answerQuestion(index: number): void;
   getQuestions(): Array<Q>;
+  clearQuestions(): void;
   canSeeResult(): boolean;
 }
