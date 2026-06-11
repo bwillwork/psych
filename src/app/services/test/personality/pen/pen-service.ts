@@ -5,7 +5,7 @@ import {QuestionScoreService, TrueFalseQuestion} from '../../../../types/test.ty
   providedIn: 'root',
 })
 export class PenService implements QuestionScoreService<TrueFalseQuestion> {
-    answerQuestion(index: number): void {
+    getQuestion(index: number): void {
         throw new Error("Method not implemented.");
     }
     getQuestions(): TrueFalseQuestion[] {

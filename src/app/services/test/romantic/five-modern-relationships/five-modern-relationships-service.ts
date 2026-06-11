@@ -5,7 +5,7 @@ import {FiveMultipleChoiceQuestion, QuestionScoreService} from '../../../../type
   providedIn: 'root',
 })
 export class FiveModernRelationshipsService implements QuestionScoreService<FiveMultipleChoiceQuestion>{
-    answerQuestion(index: number): void {
+    getQuestion(index: number): void {
         throw new Error("Method not implemented.");
     }
     getQuestions(): FiveMultipleChoiceQuestion[] {

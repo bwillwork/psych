@@ -5,7 +5,7 @@ import {FiveScaleQuestion, QuestionScoreService} from '../../../../types/test.ty
   providedIn: 'root',
 })
 export class BigFiveService implements QuestionScoreService<FiveScaleQuestion> {
-    answerQuestion(index: number): void {
+    getQuestion(index: number): void {
         throw new Error("Method not implemented.");
     }
     getQuestions(): FiveScaleQuestion[] {

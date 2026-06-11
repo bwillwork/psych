@@ -5,7 +5,7 @@ import {QuestionScoreService, TwoMultipleChoiceQuestion} from '../../../../types
   providedIn: 'root',
 })
 export class MyersBrigsService implements QuestionScoreService<TwoMultipleChoiceQuestion>{
-    answerQuestion(index: number): void {
+    getQuestion(index: number): void {
         throw new Error("Method not implemented.");
     }
     getQuestions(): TwoMultipleChoiceQuestion[] {
