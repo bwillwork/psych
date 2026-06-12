@@ -39,11 +39,11 @@ export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQ
   }
 
   getQuestions(): Array<FiveScaleQuestion> {
-    throw new Error("Method not implemented.");
+    return [...this.questions()];
   }
 
   answerQuestion(id: number, answer: FiveScaleAnswer): void {
-    const questions = [...this.questions()];
+    const questions = this.getQuestions();
     const index = questions.findIndex(q => q.id === id);
     if(index !== -1) {
       questions[index].response = answer;
@@ -63,7 +63,7 @@ export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQ
   }
 
   clearQuestions(): void {
-    throw new Error("Method not implemented.");
+    this.questions.update(() => ([]));
   }
 
   canSeeResult(): boolean {
