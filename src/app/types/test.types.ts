@@ -61,6 +61,39 @@ export interface FiveModernRelationshipsResult {
   E: number
 }
 
+export interface PenTestResult {
+  psychoticism: number,
+  extroversion: number,
+  neuroticism: number
+}
+
+export interface MyersBrigsResult {
+  energy: {
+    extroversion: number,
+    introversion: number
+  },
+  information: {
+    sensing: number,
+    intuition: number
+  },
+  decisions: {
+    thinking: number,
+    feeling: number
+  },
+  lifestyle: {
+    judging: number,
+    perceiving: number
+  }
+}
+
+export interface BigFiveResult {
+  openness: number,
+  conscientiousness: number,
+  extroversion: number,
+  agreeableness: number,
+  neuroticism: number
+}
+
 export interface QuestionScoreService<Q,A,R> {
   getQuestion(id: number): Q | undefined;
   getQuestions(): Array<Q>;
