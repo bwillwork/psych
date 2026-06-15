@@ -37,7 +37,7 @@ export interface FiveMultipleChoiceQuestion extends Question {
   response: FiveMultipleChoiceAnswer
 }
 
-export interface SixStylesOfLovingResults {
+export interface SixStylesOfLovingResult {
   eros: number,
   ludus: number,
   storage: number,
@@ -46,11 +46,19 @@ export interface SixStylesOfLovingResults {
   agape: number
 }
 
-export interface SeductionArchetypes {
+export interface SeductionArchetypesResult {
   A: number,
   B: number,
   C: number,
   D: number
+}
+
+export interface FiveModernRelationshipsResult {
+  A: number,
+  B: number,
+  C: number,
+  D: number,
+  E: number
 }
 
 export interface QuestionScoreService<Q,A,R> {

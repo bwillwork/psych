@@ -3,7 +3,7 @@ import {
   FourMultipleChoiceAnswer,
   FourMultipleChoiceQuestion,
   QuestionScoreService,
-  SeductionArchetypes
+  SeductionArchetypesResult
 } from '../../../../types/test.types';
 import {initFourMultipleChoiceQuestion} from '../../../../util/question.util';
 
@@ -20,7 +20,7 @@ initFourMultipleChoiceQuestion(1,``, {
 @Injectable({
   providedIn: 'root',
 })
-export class SeductionArchetypesService implements QuestionScoreService<FourMultipleChoiceQuestion,FourMultipleChoiceAnswer,SeductionArchetypes>{
+export class SeductionArchetypesService implements QuestionScoreService<FourMultipleChoiceQuestion,FourMultipleChoiceAnswer,SeductionArchetypesResult>{
   private questions: WritableSignal<Array<FourMultipleChoiceQuestion>> = signal([
     initFourMultipleChoiceQuestion(1,`When you first start dating someone, what is your primary goal?`, {
       A: `To create an undeniable, electric spark and a deep physical/emotional attraction.`,
@@ -93,7 +93,7 @@ export class SeductionArchetypesService implements QuestionScoreService<FourMult
       this.questions.update(() => ([]));
   }
 
-  evaluate(): SeductionArchetypes {
+  evaluate(): SeductionArchetypesResult {
     return {
       A: this.count(this.getQuestions(),"A"),
       B: this.count(this.getQuestions(),"B"),

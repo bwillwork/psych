@@ -1,17 +1,16 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {
   FiveScaleAnswer,
-  FiveScaleChoice,
   FiveScaleQuestion,
   QuestionScoreService,
-  SixStylesOfLovingResults
+  SixStylesOfLovingResult
 } from '../../../../types/test.types';
 import {initFiveScaleQuestion} from '../../../../util/question.util';
 
 @Injectable({
   providedIn: `root`,
 })
-export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQuestion, FiveScaleAnswer, SixStylesOfLovingResults>{
+export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQuestion, FiveScaleAnswer, SixStylesOfLovingResult>{
 
   private questions: WritableSignal<Array<FiveScaleQuestion>> = signal([
     initFiveScaleQuestion(1,`My partner and I had the right physical chemistry right from the start.`),
@@ -51,7 +50,7 @@ export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQ
     }
   }
 
-  evaluate(): SixStylesOfLovingResults {
+  evaluate(): SixStylesOfLovingResult {
     return {
       agape: this.getCategoryScore(this.questions(),[1,7,13]),
       eros: this.getCategoryScore(this.questions(),[2,8,14]),
