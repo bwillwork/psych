@@ -1,12 +1,12 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
-import {PenTestResult, QuestionScoreService, TrueFalseAnswer, TrueFalseQuestion} from '../../../../types/test.types';
+import {PenTestResult, ScoreEvaluatorService, TrueFalseAnswer, TrueFalseQuestion} from '../../../../types/test.types';
 import {initTrueFalseQuestion} from '../../../../util/question.util';
+import {AbstractQuestionService} from '../../abstract-question-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PenService implements QuestionScoreService<TrueFalseQuestion,TrueFalseAnswer,PenTestResult> {
-
+export class PenService extends AbstractQuestionService<TrueFalseQuestion,TrueFalseAnswer> implements ScoreEvaluatorService<PenTestResult> {
   private questions: WritableSignal<Array<TrueFalseQuestion>> = signal([
     initTrueFalseQuestion(1,`Do you prefer having a large circle of friends over having just one or two close confidants?`),
     initTrueFalseQuestion(2,`Do you often find yourself worrying about things that might go wrong?`),
@@ -25,44 +25,26 @@ export class PenService implements QuestionScoreService<TrueFalseQuestion,TrueFa
     initTrueFalseQuestion(15,`Do you sometimes enjoy being deliberately unconventional or shocking others with your behavior?`),
   ]);
 
-    getQuestion(id: number): TrueFalseQuestion | undefined {
-      return this.getQuestions().find(q => q.id === id);
-    }
+  public override getQuestions(): TrueFalseQuestion[] {
+    return [...this.questions()];
+  }
 
-    getQuestions(): TrueFalseQuestion[] {
-      return [...this.questions()];
-    }
+  public override setQuestions(questions: TrueFalseQuestion[]): void {
+    this.questions.update(() => questions)
+  }
 
-    clearQuestions(): void {
-      this.questions.update(() => ([]));
-    }
+  evaluate(): PenTestResult {
+    return {
+      extroversion: this.countTrueAnswers([3,6,9,12,15]),
+      neuroticism: this.countTrueAnswers([1,4,7,10,13]),
+      psychoticism: this.countTrueAnswers([2,5,8,11,14])
+    };
+  }
 
-    answerQuestion(id: number, answer: TrueFalseAnswer): void {
-      const questions = this.getQuestions();
-      const index = questions.findIndex(q => q.id === id);
-      if(index !== -1) {
-        questions[index].response = answer;
-        this.questions.update(() => questions);
-      }
-    }
-
-    evaluate(): PenTestResult {
-      return {
-        extroversion: this.countTrueAnswers([3,6,9,12,15]),
-        neuroticism: this.countTrueAnswers([1,4,7,10,13]),
-        psychoticism: this.countTrueAnswers([2,5,8,11,14])
-      };
-    }
-
-    canSeeResult(): boolean {
-      // All questions need an answer
-      return this.questions().findIndex(q => q.response === undefined) === -1;
-    }
-
-    private countTrueAnswers(questionIds: Array<number>) {
-      return this.getQuestions()
-        .filter((q) => (q.id in questionIds && q.response))
-        .length;
-    }
+  private countTrueAnswers(questionIds: Array<number>) {
+    return this.getQuestions()
+      .filter((q) => (q.id in questionIds && q.response))
+      .length;
+  }
 
 }

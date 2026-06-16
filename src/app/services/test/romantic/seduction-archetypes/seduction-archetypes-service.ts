@@ -2,10 +2,11 @@ import {Injectable, signal, WritableSignal} from '@angular/core';
 import {
   FourMultipleChoiceAnswer,
   FourMultipleChoiceQuestion,
-  QuestionScoreService,
+  ScoreEvaluatorService,
   SeductionArchetypesResult
 } from '../../../../types/test.types';
 import {initFourMultipleChoiceQuestion} from '../../../../util/question.util';
+import {AbstractQuestionService} from '../../abstract-question-service';
 
 /*
 initFourMultipleChoiceQuestion(1,``, {
@@ -20,7 +21,7 @@ initFourMultipleChoiceQuestion(1,``, {
 @Injectable({
   providedIn: 'root',
 })
-export class SeductionArchetypesService implements QuestionScoreService<FourMultipleChoiceQuestion,FourMultipleChoiceAnswer,SeductionArchetypesResult>{
+export class SeductionArchetypesService extends AbstractQuestionService<FourMultipleChoiceQuestion,FourMultipleChoiceAnswer> implements ScoreEvaluatorService<SeductionArchetypesResult>{
   private questions: WritableSignal<Array<FourMultipleChoiceQuestion>> = signal([
     initFourMultipleChoiceQuestion(1,`When you first start dating someone, what is your primary goal?`, {
       A: `To create an undeniable, electric spark and a deep physical/emotional attraction.`,
@@ -72,25 +73,11 @@ export class SeductionArchetypesService implements QuestionScoreService<FourMult
     }),
   ]);
 
-  answerQuestion(id: number, answer: FourMultipleChoiceAnswer): void {
-    const questions = this.getQuestions();
-    const index = questions.findIndex(q => q.id === id);
-    if(index !== -1) {
-      questions[index].response = answer;
-      this.questions.update(() => questions);
-    }
-  }
-
-  getQuestion(id: number): FourMultipleChoiceQuestion | undefined {
-      return this.getQuestions().find(q => q.id === id);
-  }
-
-  getQuestions(): FourMultipleChoiceQuestion[] {
+  public override getQuestions(): FourMultipleChoiceQuestion[] {
     return [...this.questions()];
   }
-
-  clearQuestions(): void {
-      this.questions.update(() => ([]));
+  public override setQuestions(questions: FourMultipleChoiceQuestion[]): void {
+    this.questions.update(() => questions);
   }
 
   evaluate(): SeductionArchetypesResult {
@@ -100,11 +87,6 @@ export class SeductionArchetypesService implements QuestionScoreService<FourMult
       C: this.count(this.getQuestions(),"C"),
       D: this.count(this.getQuestions(),"D"),
     };
-  }
-
-  canSeeResult(): boolean {
-    // All questions need an answer
-    return this.questions().findIndex(q => q.response === undefined) === -1;
   }
 
   private count(questions:Array<FourMultipleChoiceQuestion>, answerType: FourMultipleChoiceAnswer): number {

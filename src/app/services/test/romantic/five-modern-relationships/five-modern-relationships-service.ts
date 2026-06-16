@@ -3,26 +3,17 @@ import {
   FiveModernRelationshipsResult,
   FiveMultipleChoiceAnswer,
   FiveMultipleChoiceQuestion, FourMultipleChoiceAnswer, FourMultipleChoiceQuestion,
-  QuestionScoreService
+  ScoreEvaluatorService
 } from '../../../../types/test.types';
 import {initFiveMultipleChoiceQuestion} from '../../../../util/question.util';
+import {AbstractQuestionService} from '../../abstract-question-service';
 
-/*
-initFiveMultipleChoiceQuestion(1,``, {
-      A: ``,
-      B: ``,
-      C: ``,
-      D: ``,
-      E: ``
-    }),
- */
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class FiveModernRelationshipsService implements QuestionScoreService<FiveMultipleChoiceQuestion,FiveMultipleChoiceAnswer,FiveModernRelationshipsResult>{
-
+export class FiveModernRelationshipsService extends AbstractQuestionService<FiveMultipleChoiceQuestion,FiveMultipleChoiceAnswer> implements ScoreEvaluatorService<FiveModernRelationshipsResult>{
   private questions:  WritableSignal<Array<FiveMultipleChoiceQuestion>> = signal([
     initFiveMultipleChoiceQuestion(1,`When a conflict or argument arises with your partner, what is your immediate instinct?`, {
       A: `To quickly back down, apologize, or change the subject just to keep the peace.`,
@@ -61,23 +52,14 @@ export class FiveModernRelationshipsService implements QuestionScoreService<Five
     }),
   ]);
 
-  getQuestion(id: number): FiveMultipleChoiceQuestion | undefined {
-    return this.getQuestions().find(q => q.id === id);
-  }
-  getQuestions(): FiveMultipleChoiceQuestion[] {
+  public override getQuestions(): FiveMultipleChoiceQuestion[] {
     return [...this.questions()];
   }
-  clearQuestions(): void {
-    this.questions.update(() => ([]));
+
+  public override setQuestions(questions: FiveMultipleChoiceQuestion[]): void {
+    this.questions.update(() => questions);
   }
-  answerQuestion(id: number, answer: FiveMultipleChoiceAnswer): void {
-    const questions = this.getQuestions();
-    const index = questions.findIndex(q => q.id === id);
-    if(index !== -1) {
-      questions[index].response = answer;
-      this.questions.update(() => questions);
-    }
-  }
+
   evaluate(): FiveModernRelationshipsResult {
       return {
         A: this.count(this.getQuestions(),"A"),
@@ -86,10 +68,6 @@ export class FiveModernRelationshipsService implements QuestionScoreService<Five
         D: this.count(this.getQuestions(),"D"),
         E: this.count(this.getQuestions(),"E"),
       };
-  }
-  canSeeResult(): boolean {
-    // All questions need an answer
-    return this.questions().findIndex(q => q.response === undefined) === -1;
   }
 
   private count(questions:Array<FiveMultipleChoiceQuestion>, answerType: FiveMultipleChoiceAnswer): number {

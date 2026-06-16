@@ -1,17 +1,17 @@
 import {Injectable, signal, WritableSignal} from '@angular/core';
 import {
   MyersBrigsResult,
-  QuestionScoreService,
+  ScoreEvaluatorService,
   TwoMultipleChoiceAnswer, TwoMultipleChoiceKeys,
   TwoMultipleChoiceQuestion
 } from '../../../../types/test.types';
 import {initTwoMultipleChoiceQuestion} from '../../../../util/question.util';
+import {AbstractQuestionService} from '../../abstract-question-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MyersBrigsService implements QuestionScoreService<TwoMultipleChoiceQuestion,TwoMultipleChoiceAnswer,MyersBrigsResult>{
-
+export class MyersBrigsService extends AbstractQuestionService<TwoMultipleChoiceQuestion,TwoMultipleChoiceAnswer> implements ScoreEvaluatorService<MyersBrigsResult>{
   private questions: WritableSignal<Array<TwoMultipleChoiceQuestion>> = signal([
     initTwoMultipleChoiceQuestion(1,`After a long, exhausting week, how do you prefer to recharge?`,{
       A: `Going out with friends, attending a party, or being around a crowd.`,
@@ -95,23 +95,14 @@ export class MyersBrigsService implements QuestionScoreService<TwoMultipleChoice
     }),
   ]);
 
-  getQuestion(id: number): TwoMultipleChoiceQuestion | undefined {
-    return this.getQuestions().find(q => q.id === id);
-  }
-  getQuestions(): TwoMultipleChoiceQuestion[] {
+  public override getQuestions(): TwoMultipleChoiceQuestion[] {
     return [...this.questions()];
   }
-  clearQuestions(): void {
-    this.questions.update(() => ([]));
+
+  public override setQuestions(questions: TwoMultipleChoiceQuestion[]): void {
+    this.questions.update(() => questions)
   }
-  answerQuestion(id: number, answer: TwoMultipleChoiceAnswer): void {
-    const questions = this.getQuestions();
-    const index = questions.findIndex(q => q.id === id);
-    if(index !== -1) {
-      questions[index].response = answer;
-      this.questions.update(() => questions);
-    }
-  }
+
   evaluate(): MyersBrigsResult {
     const energyQuestions = [1,2,3,4,5];
     const informationQuestions = [6,7,8,9,10];
@@ -124,10 +115,6 @@ export class MyersBrigsService implements QuestionScoreService<TwoMultipleChoice
       decisions: {feeling: this.countResponseType('A',decisionQuestions), thinking: this.countResponseType('B',decisionQuestions)},
       lifestyle: {judging: this.countResponseType('A',lifestyleQuestions), perceiving: this.countResponseType('B',lifestyleQuestions)}
     };
-  }
-  canSeeResult(): boolean {
-    // All questions need an answer
-    return this.questions().findIndex(q => q.response === undefined) === -1;
   }
 
   private countResponseType(typeKey: TwoMultipleChoiceKeys, questionIds: Array<number>) {

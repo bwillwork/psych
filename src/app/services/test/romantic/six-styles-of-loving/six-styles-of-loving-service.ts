@@ -2,15 +2,16 @@ import {Injectable, signal, WritableSignal} from '@angular/core';
 import {
   FiveScaleAnswer,
   FiveScaleQuestion,
-  QuestionScoreService,
+  ScoreEvaluatorService,
   SixStylesOfLovingResult
 } from '../../../../types/test.types';
 import {initFiveScaleQuestion} from '../../../../util/question.util';
+import {AbstractQuestionService} from '../../abstract-question-service';
 
 @Injectable({
   providedIn: `root`,
 })
-export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQuestion, FiveScaleAnswer, SixStylesOfLovingResult>{
+export class SixStylesOfLovingService extends AbstractQuestionService<FiveScaleQuestion, FiveScaleAnswer> implements ScoreEvaluatorService< SixStylesOfLovingResult>{
 
   private questions: WritableSignal<Array<FiveScaleQuestion>> = signal([
     initFiveScaleQuestion(1,`My partner and I had the right physical chemistry right from the start.`),
@@ -33,21 +34,12 @@ export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQ
     initFiveScaleQuestion(18,`Whatever I own belongs to my partner if they need it.`),
   ]);
 
-  getQuestion(id: number): FiveScaleQuestion | undefined {
-    return this.questions().find(q => q.id === id);
-  }
-
-  getQuestions(): Array<FiveScaleQuestion> {
+  public override getQuestions(): FiveScaleQuestion[] {
     return [...this.questions()];
   }
 
-  answerQuestion(id: number, answer: FiveScaleAnswer): void {
-    const questions = this.getQuestions();
-    const index = questions.findIndex(q => q.id === id);
-    if(index !== -1) {
-      questions[index].response = answer;
-      this.questions.update(() => questions);
-    }
+  public override setQuestions(questions: FiveScaleQuestion[]): void {
+    this.questions.update(() => questions);
   }
 
   evaluate(): SixStylesOfLovingResult {
@@ -59,15 +51,6 @@ export class SixStylesOfLovingService implements QuestionScoreService<FiveScaleQ
       pragma: this.getCategoryScore(this.questions(),[5,11,17]),
       storage: this.getCategoryScore(this.questions(),[6,12,18]),
     };
-  }
-
-  clearQuestions(): void {
-    this.questions.update(() => ([]));
-  }
-
-  canSeeResult(): boolean {
-    // All questions need an answer
-    return this.questions().findIndex(q => q.response === undefined) === -1;
   }
 
   private getCategoryScore(questions: Array<FiveScaleQuestion>,questionIds: Array<number>): number {

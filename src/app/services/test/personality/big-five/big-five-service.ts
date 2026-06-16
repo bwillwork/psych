@@ -4,14 +4,15 @@ import {
   FiveScaleAnswer,
   FiveScaleChoice,
   FiveScaleQuestion,
-  QuestionScoreService
+  ScoreEvaluatorService
 } from '../../../../types/test.types';
 import {initFiveScaleQuestion} from '../../../../util/question.util';
+import {AbstractQuestionService} from '../../abstract-question-service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BigFiveService implements QuestionScoreService<FiveScaleQuestion, FiveScaleAnswer, BigFiveResult> {
+export class BigFiveService extends AbstractQuestionService<FiveScaleQuestion, FiveScaleAnswer> implements ScoreEvaluatorService<BigFiveResult> {
 
   private questions: WritableSignal<Array<FiveScaleQuestion>> = signal([
     initFiveScaleQuestion(1,`I am fascinated by art, theater, literature, or deep philosophical theories.`),
@@ -36,23 +37,13 @@ export class BigFiveService implements QuestionScoreService<FiveScaleQuestion, F
     initFiveScaleQuestion(20,`I snap back to normal quickly after experiencing an embarrassing or stressful event.`),
   ]);
 
-  getQuestion(id: number): FiveScaleQuestion | undefined {
-    return this.getQuestions().find(q => q.id === id);
-  }
-  getQuestions(): FiveScaleQuestion[] {
+  public override getQuestions(): FiveScaleQuestion[] {
     return [...this.questions()];
   }
-  clearQuestions(): void {
-    this.questions.update(() => ([]));
+  public override setQuestions(questions: FiveScaleQuestion[]): void {
+    this.questions.update(() => questions);
   }
-  answerQuestion(id: number, answer: FiveScaleAnswer): void {
-    const questions = this.getQuestions();
-    const index = questions.findIndex(q => q.id === id);
-    if(index !== -1) {
-      questions[index].response = answer;
-      this.questions.update(() => questions);
-    }
-  }
+
   evaluate(): BigFiveResult {
     const qs = this.getQuestions();
     return {
@@ -63,10 +54,7 @@ export class BigFiveService implements QuestionScoreService<FiveScaleQuestion, F
       openness: this.calcScore(qs,[5,15],[10,20]),
     };
   }
-  canSeeResult(): boolean {
-    // All questions need an answer
-    return this.questions().findIndex(q => q.response === undefined) === -1;
-  }
+
 
   private calcScore(questions: Array<FiveScaleQuestion>, aQIds: Array<number>, bQIds: Array<number>) {
     return this.calcSubTotalA(questions,aQIds) + this.calcSubTotalB(questions,bQIds);

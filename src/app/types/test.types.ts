@@ -23,32 +23,26 @@ export type TwoMultipleChoiceAnswer = TwoMultipleChoiceKeys | undefined;
 export type FourMultipleChoiceAnswer = FourMultipleChoiceKeys | undefined;
 export type FiveMultipleChoiceAnswer = FiveMultipleChoiceKeys | undefined;
 
-export interface Question {
+export interface Question <R> {
   id: number,
   question: string
+  response: R
 }
 
-export interface TrueFalseQuestion extends Question {
-  response: TrueFalseAnswer
-}
+export interface TrueFalseQuestion extends Question<TrueFalseAnswer> {}
 
-export interface FiveScaleQuestion extends Question {
-  response: FiveScaleAnswer
-}
+export interface FiveScaleQuestion extends Question<FiveScaleAnswer> {}
 
-export interface TwoMultipleChoiceQuestion extends Question {
+export interface TwoMultipleChoiceQuestion extends Question<TwoMultipleChoiceAnswer> {
   responses: TwoMultipleChoiceResponses,
-  response: TwoMultipleChoiceAnswer
 }
 
-export interface FourMultipleChoiceQuestion extends Question {
+export interface FourMultipleChoiceQuestion extends Question<FourMultipleChoiceAnswer> {
   responses: FourMultipleChoiceResponses,
-  response: FourMultipleChoiceAnswer
 }
 
-export interface FiveMultipleChoiceQuestion extends Question {
+export interface FiveMultipleChoiceQuestion extends Question<FiveMultipleChoiceAnswer> {
   responses: FiveMultipleChoiceResponses,
-  response: FiveMultipleChoiceAnswer
 }
 
 export interface SixStylesOfLovingResult {
@@ -108,13 +102,8 @@ export interface BigFiveResult {
   neuroticism: number
 }
 
-export interface QuestionScoreService<Q,A,R> {
-  getQuestion(id: number): Q | undefined;
-  getQuestions(): Array<Q>;
-  clearQuestions(): void;
-  answerQuestion(id: number,answer: A): void;
+export interface ScoreEvaluatorService<R> {
   evaluate(): R;
-  canSeeResult(): boolean;
 }
 
 export type TestChoices = {
@@ -126,11 +115,4 @@ export type TestChoices = {
   sixStyles: boolean
 };
 
-export type QuestionServiceMap = {
-  bigFive: BigFiveService,
-  myersBrigs: MyersBrigsService,
-  pen: PenService,
-  fiveModern: FiveModernRelationshipsService,
-  seduction: SeductionArchetypesService,
-  sixStyles: SixStylesOfLovingService
-};
+

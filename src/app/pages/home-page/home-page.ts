@@ -1,5 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -11,6 +12,8 @@ import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 })
 export class HomePage {
   private fb: FormBuilder = inject(FormBuilder);
+  private router = inject(Router);
+
   form = this.fb.group({
     // Personality Tests
     bigFive: [false],
