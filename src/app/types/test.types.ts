@@ -27,20 +27,25 @@ export interface Question {
   id: number,
   question: string
 }
+
 export interface TrueFalseQuestion extends Question {
   response: TrueFalseAnswer
 }
+
 export interface FiveScaleQuestion extends Question {
   response: FiveScaleAnswer
 }
+
 export interface TwoMultipleChoiceQuestion extends Question {
   responses: TwoMultipleChoiceResponses,
   response: TwoMultipleChoiceAnswer
 }
+
 export interface FourMultipleChoiceQuestion extends Question {
   responses: FourMultipleChoiceResponses,
   response: FourMultipleChoiceAnswer
 }
+
 export interface FiveMultipleChoiceQuestion extends Question {
   responses: FiveMultipleChoiceResponses,
   response: FiveMultipleChoiceAnswer
@@ -112,6 +117,20 @@ export interface QuestionScoreService<Q,A,R> {
   canSeeResult(): boolean;
 }
 
-export type PersonalityQuestionScoreServiceType = BigFiveService | MyersBrigsService | PenService;
-export type RomanticQuestionScoreServiceType = FiveModernRelationshipsService | SeductionArchetypesService | SixStylesOfLovingService;
-export type QuestionScoreServiceType = PersonalityQuestionScoreServiceType | RomanticQuestionScoreServiceType;
+export type TestChoices = {
+  bigFive: boolean,
+  myersBrigs: boolean,
+  pen: boolean,
+  fiveModern: boolean,
+  seduction: boolean,
+  sixStyles: boolean
+};
+
+export type QuestionServiceMap = {
+  bigFive: BigFiveService,
+  myersBrigs: MyersBrigsService,
+  pen: PenService,
+  fiveModern: FiveModernRelationshipsService,
+  seduction: SeductionArchetypesService,
+  sixStyles: SixStylesOfLovingService
+};

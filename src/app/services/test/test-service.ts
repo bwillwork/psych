@@ -6,9 +6,7 @@ import {FiveModernRelationshipsService} from './romantic/five-modern-relationshi
 import {SeductionArchetypesService} from './romantic/seduction-archetypes/seduction-archetypes-service';
 import {SixStylesOfLovingService} from './romantic/six-styles-of-loving/six-styles-of-loving-service';
 import {
-  PersonalityQuestionScoreServiceType,
-  QuestionScoreService,
-  QuestionScoreServiceType, RomanticQuestionScoreServiceType
+  QuestionServiceMap, TestChoices
 } from '../../types/test.types';
 
 @Injectable({
@@ -24,18 +22,31 @@ export class TestService {
   private seductionArchService = inject(SeductionArchetypesService);
   private sixStylesOfLoveService = inject(SixStylesOfLovingService);
 
-  private personalityScoreServices: Array<PersonalityQuestionScoreServiceType> = [this.bigFiveService,this.myersBrigsService,this.penService];
-  private romanticScoreServices: Array<RomanticQuestionScoreServiceType> = [this.fiveModernRelService,this.seductionArchService,this.sixStylesOfLoveService];
-  private allScoreServices: Array<QuestionScoreServiceType> = [...this.personalityScoreServices,...this.romanticScoreServices];
+  private questionServiceMap: QuestionServiceMap = {
+    bigFive: this.bigFiveService,
+    myersBrigs: this.myersBrigsService,
+    pen: this.penService,
+    fiveModern: this.fiveModernRelService,
+    seduction: this.seductionArchService,
+    sixStyles: this.sixStylesOfLoveService
+  };
 
-  private currentTest: WritableSignal<Array<QuestionScoreServiceType>> = signal([]);
 
-  public chooseTests() {
+  private testChoices: WritableSignal<TestChoices> = signal({
+    bigFive: false,
+    myersBrigs: false,
+    pen: false,
+    fiveModern: false,
+    seduction: false,
+    sixStyles: false
+  });
 
+  public chooseTests(testChoices: TestChoices) {
+    this.testChoices.update(() => testChoices);
   }
-
 
   public canViewResults(): boolean {
     return true;
   }
+
 }

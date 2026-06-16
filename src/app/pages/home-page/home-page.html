@@ -1,1 +1,37 @@
-<p>home-page works!</p>
+<h1>Choose the tests you which to take!</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <!-- Personality Tests -->
+  <div class="mb-3 form-check">
+    <input id="bigFive" type="checkbox" class="form-check-input" formControlName="bigFive" />
+    <label for="bigFive" class="form-check-label">Big 5</label>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input id="myersBrigs" type="checkbox" class="form-check-input" formControlName="myersBrigs" />
+    <label for="myersBrigs" class="form-check-label">Myers Brigs</label>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input id="pen" type="checkbox" class="form-check-input" formControlName="pen" />
+    <label for="pen" class="form-check-label">PEN Personality</label>
+  </div>
+
+  <!-- Romance Tests -->
+  <div class="mb-3 form-check">
+    <input id="fiveModern" type="checkbox" class="form-check-input" formControlName="fiveModern" />
+    <label for="fiveModern" class="form-check-label">5 Modern Relationships</label>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input id="seduction" type="checkbox" class="form-check-input" formControlName="seduction" />
+    <label for="seduction" class="form-check-label">Seduction Archetypes</label>
+  </div>
+
+  <div class="mb-3 form-check">
+    <input id="sixStyles" type="checkbox" class="form-check-input" formControlName="sixStyles" />
+    <label for="sixStyles" class="form-check-label">6 Styles of Loving</label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
