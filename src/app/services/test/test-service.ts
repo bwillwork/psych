@@ -1,4 +1,4 @@
-import {Injectable, signal, WritableSignal} from '@angular/core';
+import {computed, Injectable, Signal, signal, WritableSignal} from '@angular/core';
 import {TestChoices} from '../../types/test.types';
 
 @Injectable({
@@ -15,7 +15,12 @@ export class TestService {
     sixStyles: false
   });
 
-
+  private startedTest = computed(() => {
+    const choiceValues = Object.values(this.testChoices()) as Array<boolean>;
+    return choiceValues.reduce((agg,val) => {
+      return agg || val;
+    },false);
+  });
 
   public chooseTests(testChoices: TestChoices) {
     this.testChoices.update(() => testChoices);
@@ -24,12 +29,16 @@ export class TestService {
   public resetTestChoices() {
     this.testChoices.update(() => ({
       bigFive: false,
-        myersBrigs: false,
-        pen: false,
-        fiveModern: false,
-        seduction: false,
-        sixStyles: false
+      myersBrigs: false,
+      pen: false,
+      fiveModern: false,
+      seduction: false,
+      sixStyles: false
     }));
+  }
+
+  public hasStartedTest(): Signal<boolean> {
+    return this.startedTest;
   }
 
   public canViewResults(): boolean {

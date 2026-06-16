@@ -18,7 +18,7 @@ export const viewResultsGuard: CanActivateFn = (
 
 export const routes: Routes = [
   { path: '', component: HomePage, data: { inNav: true, label: 'Home' } },
-  { path: 'test', component: TestPage, data: { inNav: true, label: 'Test'} },
+  { path: 'test', component: TestPage, data: { inNav: false } },
   { path: 'results', component: ResultsPage, canActivate: [viewResultsGuard], data: { inNav: false } },
   { path: 'methodology', component: MethodologyPage, data: { inNav: true, label: 'Methodology'} },
   { path: '**', redirectTo: '/' , data: {inNav: false}},

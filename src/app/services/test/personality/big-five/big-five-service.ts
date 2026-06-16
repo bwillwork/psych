@@ -55,7 +55,6 @@ export class BigFiveService extends AbstractQuestionService<FiveScaleQuestion, F
     };
   }
 
-
   private calcScore(questions: Array<FiveScaleQuestion>, aQIds: Array<number>, bQIds: Array<number>) {
     return this.calcSubTotalA(questions,aQIds) + this.calcSubTotalB(questions,bQIds);
   }

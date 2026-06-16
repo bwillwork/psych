@@ -17,6 +17,8 @@ export class HomePage {
   private testService = inject(TestService);
   private router = inject(Router);
 
+  hasStartedTest = this.testService.hasStartedTest();
+
   form = this.fb.group({
     // Personality Tests
     bigFive: [false],
@@ -28,6 +30,14 @@ export class HomePage {
     seduction: [false],
     sixStyles: [false],
   });
+
+  yes() {
+    this.router.navigate(['/test']);
+  }
+
+  no() {
+    this.testService.resetTestChoices();
+  }
 
   onSubmit() {
     console.log(this.form.value);
