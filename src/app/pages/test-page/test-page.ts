@@ -1,5 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {Router} from '@angular/router';
+import {TestService} from '../../services/test/test-service';
 
 @Component({
   selector: 'app-test-page',
@@ -9,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class TestPage {
 
+  private testService = inject(TestService);
   private router = inject(Router);
 
   seeResults() {

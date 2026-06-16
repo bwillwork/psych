@@ -19,6 +19,15 @@ export abstract class AbstractQuestionService <Q extends Question<A>,A> {
       this.setQuestions(questions);
     }
   }
+
+  getAnsweredQuestions(): Array<Q> {
+    return this.getQuestions().filter(q => q.response !== undefined);
+  }
+
+  getUnansweredQuestions(): Array<Q> {
+    return this.getQuestions().filter(q => q.response === undefined);
+  }
+
   canSeeResult(): boolean {
     // All questions need an answer
     return this.getQuestions().findIndex(q => q.response === undefined) === -1;

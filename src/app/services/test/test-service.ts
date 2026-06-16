@@ -6,7 +6,6 @@ import {TestChoices} from '../../types/test.types';
 })
 export class TestService {
 
-
   private testChoices: WritableSignal<TestChoices> = signal({
     bigFive: false,
     myersBrigs: false,
@@ -20,6 +19,17 @@ export class TestService {
 
   public chooseTests(testChoices: TestChoices) {
     this.testChoices.update(() => testChoices);
+  }
+
+  public resetTestChoices() {
+    this.testChoices.update(() => ({
+      bigFive: false,
+        myersBrigs: false,
+        pen: false,
+        fiveModern: false,
+        seduction: false,
+        sixStyles: false
+    }));
   }
 
   public canViewResults(): boolean {
