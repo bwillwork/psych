@@ -11,6 +11,7 @@ export abstract class AbstractQuestionService <Q extends Question<A>,A> {
     const clearedResponses = this.getQuestions().map(q => ({...q,response: undefined}));
     this.setQuestions(clearedResponses);
   }
+
   answerQuestion(id: number, answer: A): void {
     const questions = this.getQuestions();
     const index = questions.findIndex(q => q.id === id);

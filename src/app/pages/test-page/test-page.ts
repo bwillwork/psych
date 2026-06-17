@@ -10,11 +10,24 @@ import {TestService} from '../../services/test/test-service';
 })
 export class TestPage {
 
+
+
+
   private testService = inject(TestService);
   private router = inject(Router);
+  private choices = this.testService.getTestChoices();
+
+
+
+  constructor() {
+
+
+
+  }
 
   seeResults() {
-    this.router.navigate(["/results"]);
+    const canViewResults = this.testService.canViewResults();
+    if(canViewResults) this.router.navigate(["/results"]);
   }
 
 }

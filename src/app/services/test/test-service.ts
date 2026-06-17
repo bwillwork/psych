@@ -37,6 +37,10 @@ export class TestService {
     }));
   }
 
+  public getTestChoices(): Signal<TestChoices> {
+    return this.testChoices;
+  }
+
   public hasStartedTest(): Signal<boolean> {
     return this.startedTest;
   }

@@ -23,8 +23,11 @@ export type TwoMultipleChoiceAnswer = TwoMultipleChoiceKeys | undefined;
 export type FourMultipleChoiceAnswer = FourMultipleChoiceKeys | undefined;
 export type FiveMultipleChoiceAnswer = FiveMultipleChoiceKeys | undefined;
 
+export type TestType = 'bigFive' | 'myersBrigs' | 'pen' | 'fiveModern' | 'seduction' | 'sixStyles';
+
 export interface Question <R> {
   id: number,
+  test: TestType,
   question: string
   response: R
 }
@@ -114,5 +117,25 @@ export type TestChoices = {
   seduction: boolean,
   sixStyles: boolean
 };
+
+export type TestTypeKeys = {
+  bigFive: TestType,
+  myersBrigs: TestType,
+  pen: TestType,
+  fiveModern: TestType,
+  seduction: TestType,
+  sixStyles: TestType
+};
+
+export type TestQuestions = {
+  bigFive: Array<FiveScaleQuestion>,
+  myersBrigs: Array<TwoMultipleChoiceQuestion>,
+  pen: Array<TrueFalseQuestion>,
+  fiveModern: Array<FiveMultipleChoiceQuestion>,
+  seduction: Array<FourMultipleChoiceQuestion>,
+  sixStyles: Array<FiveScaleQuestion>
+};
+
+export type TestQuestionList = Array<TrueFalseQuestion | FiveScaleQuestion | TwoMultipleChoiceQuestion | FourMultipleChoiceQuestion | FiveMultipleChoiceQuestion>;
 
 
