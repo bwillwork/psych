@@ -118,7 +118,7 @@ export class MyersBrigsService extends AbstractQuestionService<TwoMultipleChoice
   }
 
   private countResponseType(typeKey: TwoMultipleChoiceKeys, questionIds: Array<number>) {
-    return this.getQuestions().filter(q => (q.id in questionIds && q.response === typeKey)).length;
+    return this.getQuestions().filter(q => (q.id in questionIds && q.answer === typeKey)).length;
   }
 
 }

@@ -55,7 +55,7 @@ export class SixStylesOfLovingService extends AbstractQuestionService<FiveScaleQ
 
   private getCategoryScore(questions: Array<FiveScaleQuestion>,questionIds: Array<number>): number {
     const filterFunc = (q:FiveScaleQuestion) => (q.id in questionIds);
-    const addUpFunc = (agg: number,val: FiveScaleQuestion) => (agg + (val.response ?? 0))
+    const addUpFunc = (agg: number,val: FiveScaleQuestion) => (agg + (val.answer ?? 0))
     return questions.filter(filterFunc).reduce(addUpFunc,0);
   }
 

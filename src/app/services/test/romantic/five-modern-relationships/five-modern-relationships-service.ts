@@ -72,7 +72,7 @@ export class FiveModernRelationshipsService extends AbstractQuestionService<Five
 
   private count(questions:Array<FiveMultipleChoiceQuestion>, answerType: FiveMultipleChoiceAnswer): number {
     return questions.reduce((agg,q) => {
-      return (q.response === answerType) ? agg + 1: agg;
+      return (q.answer === answerType) ? agg + 1: agg;
     },0)
   }
 }

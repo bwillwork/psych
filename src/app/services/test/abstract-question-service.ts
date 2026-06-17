@@ -16,21 +16,21 @@ export abstract class AbstractQuestionService <Q extends Question<A>,A> {
     const questions = this.getQuestions();
     const index = questions.findIndex(q => q.id === id);
     if(index !== -1) {
-      questions[index].response = answer;
+      questions[index].answer = answer;
       this.setQuestions(questions);
     }
   }
 
   getAnsweredQuestions(): Array<Q> {
-    return this.getQuestions().filter(q => q.response !== undefined);
+    return this.getQuestions().filter(q => q.answer !== undefined);
   }
 
   getUnansweredQuestions(): Array<Q> {
-    return this.getQuestions().filter(q => q.response === undefined);
+    return this.getQuestions().filter(q => q.answer === undefined);
   }
 
   canSeeResult(): boolean {
     // All questions need an answer
-    return this.getQuestions().findIndex(q => q.response === undefined) === -1;
+    return this.getQuestions().findIndex(q => q.answer === undefined) === -1;
   }
 }

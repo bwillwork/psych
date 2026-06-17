@@ -91,7 +91,7 @@ export class SeductionArchetypesService extends AbstractQuestionService<FourMult
 
   private count(questions:Array<FourMultipleChoiceQuestion>, answerType: FourMultipleChoiceAnswer): number {
     return questions.reduce((agg,q) => {
-      return (q.response === answerType) ? agg + 1: agg;
+      return (q.answer === answerType) ? agg + 1: agg;
     },0)
   }
 }

@@ -25,11 +25,10 @@ export type FiveMultipleChoiceAnswer = FiveMultipleChoiceKeys | undefined;
 
 export type TestType = 'bigFive' | 'myersBrigs' | 'pen' | 'fiveModern' | 'seduction' | 'sixStyles';
 
-export interface Question <R> {
+export interface Question <A> {
   id: number,
-  test: TestType,
   question: string
-  response: R
+  answer: A
 }
 
 export interface TrueFalseQuestion extends Question<TrueFalseAnswer> {}

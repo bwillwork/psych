@@ -62,7 +62,7 @@ export class BigFiveService extends AbstractQuestionService<FiveScaleQuestion, F
   private calcSubTotalA(questions: Array<FiveScaleQuestion>, questionIds: Array<number>) {
     let result = 0;
     for(let q of questions.filter((q) => q.id in questionIds)) {
-      if(q.response) result += q.response;
+      if(q.answer) result += q.answer;
     }
     return result;
   }
@@ -70,7 +70,7 @@ export class BigFiveService extends AbstractQuestionService<FiveScaleQuestion, F
   private calcSubTotalB(questions: Array<FiveScaleQuestion>, questionIds: Array<number>) {
     let result = 0;
     for(let q of questions.filter((q) => q.id in questionIds)) {
-      if(q.response) result += this.reverseScore(q.response);
+      if(q.answer) result += this.reverseScore(q.answer);
     }
     return result;
   }

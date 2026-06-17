@@ -43,7 +43,7 @@ export class PenService extends AbstractQuestionService<TrueFalseQuestion,TrueFa
 
   private countTrueAnswers(questionIds: Array<number>) {
     return this.getQuestions()
-      .filter((q) => (q.id in questionIds && q.response))
+      .filter((q) => (q.id in questionIds && q.answer))
       .length;
   }
 
