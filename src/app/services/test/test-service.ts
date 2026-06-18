@@ -1,13 +1,12 @@
 import {computed, Injectable, Signal, signal, WritableSignal} from '@angular/core';
 import {
   AllQuestionTypes,
-  FiveMultipleChoiceQuestion,
-  FiveScaleQuestion,
-  FourMultipleChoiceQuestion, Question, QuestionId, TestChoices,
-  TestQuestionMap, TestType,
-  TestTypeKeys,
-  TrueFalseQuestion,
-  TwoMultipleChoiceQuestion
+  Question,
+  QuestionId,
+  TestChoices,
+  TestQuestionMap, TestState,
+  TestType,
+  TestTypeKeys
 } from '../../types/test.types';
 import {
   initBigFiveQuestions,
@@ -54,6 +53,41 @@ export class TestService {
     ];
   });
 
+  private test: WritableSignal<Array<AllQuestionTypes>> = signal([]);
+  private currentQuestion: Signal<AllQuestionTypes | undefined> = computed(() => {
+    return this.test().find(q => (q.answer === undefined));
+  });
+  private noMoreQuestions: Signal<boolean> = computed(() => this.currentQuestion() === undefined);
+  private testState: Signal<TestState> = computed(() => {
+    return {
+      total: this.test().length,
+      answered: this.test().filter(q => (q.answer !== undefined)).length,
+      currentQuestion: this.currentQuestion()
+    };
+  });
+
+  public resetTest() {
+    this.clearQuestionAnswers();
+    this.test.update(() => ([]));
+  }
+
+  public initTest(testChoices: TestChoices) {
+    const initialized = this.test().length !== 0;
+    if(!initialized) {
+      const testTypes = this.getTestTypeList(testChoices);
+      this.clearQuestionAnswers();
+      const map = this.questionMap();
+      this.test.update(() => {
+        const result: Array<AllQuestionTypes> = [];
+        for(const type of testTypes) {
+          result.concat(map[type as TestType]);
+        }
+        return this.shuffle(result);
+      });
+    }
+  }
+
+
   public getNextTestQuestion(testChoices: TestChoices): AllQuestionTypes | undefined {
     const testTypes = this.getTestTypeList(testChoices);
     const unansweredQuestions = this.getUnansweredQuestions()
@@ -85,7 +119,12 @@ export class TestService {
       .filter(q => (q.answer !== undefined));
   }
 
-  answerQuestion<Q extends Question<A>,A>(question: Q,answer: A): boolean {
+  public canSeeResults(testChoices: TestChoices): boolean {
+    const unansweredQuestions = this.getUnansweredTestQuestionCount(testChoices);
+    return unansweredQuestions === 0;
+  }
+
+  public answerQuestion<Q extends Question<A>,A>(question: Q,answer: A): boolean {
     const map = {...this.questionMap()};
     const questionId: QuestionId = question.id;
     const index = map[questionId.test].findIndex(q => (q.id.num === questionId.num));
@@ -95,6 +134,16 @@ export class TestService {
       return true;
     }
     return false;
+  }
+
+  private clearQuestionAnswers() {
+    const clearQuestion = (q: AllQuestionTypes) => q.answer = undefined;
+    const map = {...this.questionMap()};
+    const keys = Object.keys(map);
+    for(const key of keys) {
+      map[key as TestType].forEach(clearQuestion);
+    }
+    this.questionMap.update(() => map);
   }
 
   private shuffle(questions: Array<AllQuestionTypes>): Array<AllQuestionTypes> {
@@ -109,8 +158,7 @@ export class TestService {
       currentIndex--;
 
       // And swap it with the current element.
-      [result[currentIndex], result[randomIndex]] = [
-        result[randomIndex], result[currentIndex]];
+      [result[currentIndex], result[randomIndex]] = [result[randomIndex], result[currentIndex]];
     }
     return result;
   }

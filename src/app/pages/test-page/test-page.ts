@@ -1,16 +1,8 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnDestroy} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
+import {TestChoiceService} from '../../services/test-choice/test-choice-service';
 import {TestService} from '../../services/test/test-service';
-import {BigFiveService} from '../../services/test/personality/big-five/big-five-service';
-import {MyersBrigsService} from '../../services/test/personality/myers-brigs/myers-brigs-service';
-import {PenService} from '../../services/test/personality/pen/pen-service';
-import {
-  FiveModernRelationshipsService
-} from '../../services/test/romantic/five-modern-relationships/five-modern-relationships-service';
-import {
-  SeductionArchetypesService
-} from '../../services/test/romantic/seduction-archetypes/seduction-archetypes-service';
-import {SixStylesOfLovingService} from '../../services/test/romantic/six-styles-of-loving/six-styles-of-loving-service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-test-page',
@@ -20,20 +12,15 @@ import {SixStylesOfLovingService} from '../../services/test/romantic/six-styles-
   templateUrl: './test-page.html',
   styleUrl: './test-page.css',
 })
-export class TestPage {
+export class TestPage implements OnDestroy {
 
 
-  private bigFive = inject(BigFiveService);
-  private myersBrigs = inject(MyersBrigsService);
-  private pen = inject(PenService);
-
-  private fiveModernRelationships = inject(FiveModernRelationshipsService);
-  private seductionArchetypes = inject(SeductionArchetypesService);
-  private sixStylesOfLoving = inject(SixStylesOfLovingService);
-
+  private testChoiceService = inject(TestChoiceService);
   private testService = inject(TestService);
   private router = inject(Router);
-  private choices = this.testService.getTestChoices();
+  private choices = this.testChoiceService.getTestChoices();
+
+  private subs: Array<Subscription> = [];
 
 
   constructor() {
@@ -41,8 +28,21 @@ export class TestPage {
   }
 
   seeResults() {
-    const canViewResults = this.testService.canViewResults();
+    const canViewResults = false;//this.testService.canViewResults();
     if(canViewResults) this.router.navigate(["/results"]);
+  }
+
+  previous() {
+
+  }
+
+  next() {
+
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(s => s.unsubscribe());
+    this.subs = [];
   }
 
 }

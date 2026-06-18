@@ -1,8 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {TestService} from '../../services/test/test-service';
 import {TestChoices} from '../../types/test.types';
+import {TestChoiceService} from '../../services/test-choice/test-choice-service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,10 +14,10 @@ import {TestChoices} from '../../types/test.types';
 })
 export class HomePage {
   private fb: FormBuilder = inject(FormBuilder);
-  private testService = inject(TestService);
+  private testChoiceService = inject(TestChoiceService);
   private router = inject(Router);
 
-  hasStartedTest = this.testService.hasStartedTest();
+  hasStartedTest = this.testChoiceService.hasStartedTest();
 
   form = this.fb.group({
     // Personality Tests
@@ -36,12 +36,12 @@ export class HomePage {
   }
 
   no() {
-    this.testService.resetTestChoices();
+    this.testChoiceService.resetTestChoices();
   }
 
   onSubmit() {
     console.log(this.form.value);
-    this.testService.chooseTests(this.form.value as TestChoices);
+    this.testChoiceService.chooseTests(this.form.value as TestChoices);
     this.router.navigate(['/test']);
   }
 }

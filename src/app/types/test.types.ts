@@ -139,4 +139,9 @@ export type TestTypeKeys = {
   sixStyles: TestType
 };
 
+export interface TestState {
+  total: number,
+  answered: number,
+  currentQuestion: AllQuestionTypes | undefined
+}
 
