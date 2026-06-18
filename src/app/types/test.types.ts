@@ -1,12 +1,3 @@
-import {BigFiveService} from '../services/test/personality/big-five/big-five-service';
-import {MyersBrigsService} from '../services/test/personality/myers-brigs/myers-brigs-service';
-import {PenService} from '../services/test/personality/pen/pen-service';
-import {
-  FiveModernRelationshipsService
-} from '../services/test/romantic/five-modern-relationships/five-modern-relationships-service';
-import {SeductionArchetypesService} from '../services/test/romantic/seduction-archetypes/seduction-archetypes-service';
-import {SixStylesOfLovingService} from '../services/test/romantic/six-styles-of-loving/six-styles-of-loving-service';
-
 export type FiveScaleChoice = 1 | 2 | 3 | 4 | 5;
 
 export type TwoMultipleChoiceKeys = 'A' | 'B';
@@ -25,8 +16,13 @@ export type FiveMultipleChoiceAnswer = FiveMultipleChoiceKeys | undefined;
 
 export type TestType = 'bigFive' | 'myersBrigs' | 'pen' | 'fiveModern' | 'seduction' | 'sixStyles';
 
-export interface Question <A> {
+export type QuestionId = {
   id: number,
+  test: TestType
+};
+
+export interface Question <A> {
+  id: QuestionId,
   question: string
   answer: A
 }
@@ -46,6 +42,8 @@ export interface FourMultipleChoiceQuestion extends Question<FourMultipleChoiceA
 export interface FiveMultipleChoiceQuestion extends Question<FiveMultipleChoiceAnswer> {
   responses: FiveMultipleChoiceResponses,
 }
+
+export type AllQuestionTypes = TrueFalseQuestion | FiveScaleQuestion | TwoMultipleChoiceQuestion | FourMultipleChoiceQuestion | FiveMultipleChoiceQuestion;
 
 export interface SixStylesOfLovingResult {
   eros: number,
@@ -104,8 +102,13 @@ export interface BigFiveResult {
   neuroticism: number
 }
 
-export interface ScoreEvaluatorService<R> {
-  evaluate(): R;
+export interface QuestionService<Q extends Question<A>,A> {
+  answerQuestion(questions:Array<Q>,answer: A): boolean;
+}
+
+export interface EvaluatorService<Q extends Question<A>,A,R> {
+  evaluate(questions: Array<Q>): R;
+  isFinished(questions: Array<Q>): boolean
 }
 
 export type TestChoices = {
@@ -116,6 +119,17 @@ export type TestChoices = {
   seduction: boolean,
   sixStyles: boolean
 };
+
+export type TestQuestionMap = {
+  bigFive: Array<FiveScaleQuestion>,
+  myersBrigs: Array<TwoMultipleChoiceQuestion>,
+  pen: Array<TrueFalseQuestion>,
+  fiveModern: Array<FiveMultipleChoiceQuestion>,
+  seduction: Array<FourMultipleChoiceQuestion>,
+  sixStyles: Array<FiveScaleQuestion>
+};
+
+export type TestQuestionList = Array<AllQuestionTypes>;
 
 export type TestTypeKeys = {
   bigFive: TestType,
