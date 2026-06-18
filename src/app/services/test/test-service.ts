@@ -16,6 +16,8 @@ import {
   initSeductionQuestions,
   initSixStylesQuestions
 } from '../../util/question.util';
+import {Observable} from 'rxjs';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +33,7 @@ export class TestService {
     sixStyles: "sixStyles"
   };
 
+  // All Questions
   private questionMap: WritableSignal<TestQuestionMap> = signal({
     bigFive: initBigFiveQuestions(),
     myersBrigs: initMyersBrigsQuestions(),
@@ -53,6 +56,7 @@ export class TestService {
     ];
   });
 
+  // Specific Test Questions
   private test: WritableSignal<Array<AllQuestionTypes>> = signal([]);
   private currentQuestion: Signal<AllQuestionTypes | undefined> = computed(() => {
     return this.test().find(q => (q.answer === undefined));
@@ -87,6 +91,18 @@ export class TestService {
     }
   }
 
+  public observeTestState(): Observable<TestState> {
+    return toObservable(this.testState);
+  }
+
+  public answerCurrentQuestion<Q extends Question<A>,A>(id: QuestionId,answer: A) {
+    const test = [...this.test()];
+    const index = test.findIndex(q => (q.id.num === id.num && q.id.test === id.test));
+    if(index !== -1) {
+      (test[index] as Q).answer = answer;
+      this.test.update(() => test);
+    }
+  }
 
   public getNextTestQuestion(testChoices: TestChoices): AllQuestionTypes | undefined {
     const testTypes = this.getTestTypeList(testChoices);
