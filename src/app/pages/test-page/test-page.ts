@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {TestService} from '../../services/test/test-service';
 import {BigFiveService} from '../../services/test/personality/big-five/big-five-service';
 import {MyersBrigsService} from '../../services/test/personality/myers-brigs/myers-brigs-service';
@@ -14,7 +14,9 @@ import {SixStylesOfLovingService} from '../../services/test/romantic/six-styles-
 
 @Component({
   selector: 'app-test-page',
-  imports: [],
+  imports: [
+    RouterOutlet
+  ],
   templateUrl: './test-page.html',
   styleUrl: './test-page.css',
 })

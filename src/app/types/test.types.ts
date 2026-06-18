@@ -126,15 +126,4 @@ export type TestTypeKeys = {
   sixStyles: TestType
 };
 
-export type TestQuestions = {
-  bigFive: Array<FiveScaleQuestion>,
-  myersBrigs: Array<TwoMultipleChoiceQuestion>,
-  pen: Array<TrueFalseQuestion>,
-  fiveModern: Array<FiveMultipleChoiceQuestion>,
-  seduction: Array<FourMultipleChoiceQuestion>,
-  sixStyles: Array<FiveScaleQuestion>
-};
-
-export type TestQuestionList = Array<TrueFalseQuestion | FiveScaleQuestion | TwoMultipleChoiceQuestion | FourMultipleChoiceQuestion | FiveMultipleChoiceQuestion>;
-
 

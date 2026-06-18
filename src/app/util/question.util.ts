@@ -1,20 +1,14 @@
 import {
   FiveMultipleChoiceQuestion,
   FiveMultipleChoiceResponses,
-  FiveScaleQuestion, FourMultipleChoiceQuestion, FourMultipleChoiceResponses, TestType, TestTypeKeys,
+  FiveScaleQuestion,
+  FourMultipleChoiceQuestion,
+  FourMultipleChoiceResponses,
   TrueFalseQuestion,
   TwoMultipleChoiceQuestion,
   TwoMultipleChoiceResponses
 } from '../types/test.types';
 
-export const testTypeKeys: TestTypeKeys = {
-  bigFive: "bigFive",
-  myersBrigs: "myersBrigs",
-  pen: "pen",
-  fiveModern: "fiveModern",
-  seduction: "seduction",
-  sixStyles: "sixStyles"
-};
 
 export function initTrueFalseQuestion(id: number,question: string): TrueFalseQuestion {
   return {id,question, answer: undefined};
