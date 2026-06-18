@@ -21,23 +21,23 @@ export const testKeys: TestTypeKeys = {
 
 // Question Init
 export function initTrueFalseQuestion(id: number,test: TestType,question: string): TrueFalseQuestion {
-  return {id:{id,test},question, answer: undefined};
+  return {id:{num: id,test},question, answer: undefined};
 }
 
 export function initFiveScaleQuestion(id: number,test: TestType,question: string): FiveScaleQuestion {
-  return {id:{id,test},question, answer: undefined};
+  return {id:{num: id,test},question, answer: undefined};
 }
 
 export function initTwoMultipleChoiceQuestion(id: number,test: TestType,question: string, responses:TwoMultipleChoiceResponses): TwoMultipleChoiceQuestion {
-  return { id:{id,test},question, responses, answer: undefined};
+  return { id:{num: id,test},question, responses, answer: undefined};
 }
 
 export function initFourMultipleChoiceQuestion(id: number,test: TestType,question: string, responses:FourMultipleChoiceResponses): FourMultipleChoiceQuestion {
-  return { id:{id,test},question, responses, answer: undefined};
+  return { id:{num: id,test},question, responses, answer: undefined};
 }
 
 export function initFiveMultipleChoiceQuestion(id: number,test: TestType,question: string, responses:FiveMultipleChoiceResponses): FiveMultipleChoiceQuestion {
-  return { id:{id,test},question, responses, answer: undefined};
+  return { id:{num: id,test},question, responses, answer: undefined};
 }
 
 // Test Question Init

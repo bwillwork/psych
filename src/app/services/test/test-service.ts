@@ -3,7 +3,7 @@ import {
   AllQuestionTypes,
   FiveMultipleChoiceQuestion,
   FiveScaleQuestion,
-  FourMultipleChoiceQuestion, TestChoices,
+  FourMultipleChoiceQuestion, Question, QuestionId, TestChoices,
   TestQuestionMap, TestType,
   TestTypeKeys,
   TrueFalseQuestion,
@@ -32,38 +32,29 @@ export class TestService {
     sixStyles: "sixStyles"
   };
 
-  private bigFiveQuestions: WritableSignal<Array<FiveScaleQuestion>> = signal(initBigFiveQuestions());
-  private myersBrigsQuestions: WritableSignal<Array<TwoMultipleChoiceQuestion>> = signal(initMyersBrigsQuestions());
-  private penQuestions: WritableSignal<Array<TrueFalseQuestion>> = signal(initPenQuestions());
-
-  private fiveModernRelQuestions:  WritableSignal<Array<FiveMultipleChoiceQuestion>> = signal(initFiveModernQuestions());
-  private seductionQuestions: WritableSignal<Array<FourMultipleChoiceQuestion>> = signal(initSeductionQuestions());
-  private sixStylesQuestions: WritableSignal<Array<FiveScaleQuestion>> = signal(initSixStylesQuestions());
-
-  private questionMap: Signal<TestQuestionMap> = computed(() => {
-    return {
-      bigFive: this.bigFiveQuestions(),
-      myersBrigs: this.myersBrigsQuestions(),
-      pen: this.penQuestions(),
-      fiveModern: this.fiveModernRelQuestions(),
-      seduction: this.seductionQuestions(),
-      sixStyles: this.sixStylesQuestions()
-    };
+  private questionMap: WritableSignal<TestQuestionMap> = signal({
+    bigFive: initBigFiveQuestions(),
+    myersBrigs: initMyersBrigsQuestions(),
+    pen: initPenQuestions(),
+    fiveModern: initFiveModernQuestions(),
+    seduction: initSeductionQuestions(),
+    sixStyles: initSixStylesQuestions()
   });
 
   private questionList = computed(() => {
+    const map = this.questionMap();
     return [
-      ...this.bigFiveQuestions(),
-      ...this.myersBrigsQuestions(),
-      ...this.penQuestions(),
+      ...map.bigFive,
+      ...map.myersBrigs,
+      ...map.pen,
 
-      ...this.fiveModernRelQuestions(),
-      ...this.seductionQuestions(),
-      ...this.sixStylesQuestions(),
+      ...map.fiveModern,
+      ...map.seduction,
+      ...map.sixStyles,
     ];
   });
 
-  public getNextQuestion(testChoices: TestChoices): AllQuestionTypes | undefined {
+  public getNextTestQuestion(testChoices: TestChoices): AllQuestionTypes | undefined {
     const testTypes = this.getTestTypeList(testChoices);
     const unansweredQuestions = this.getUnansweredQuestions()
       .filter(q => (q.id.test in testTypes));
@@ -74,6 +65,16 @@ export class TestService {
     return;
   }
 
+  public getTestQuestionCount(testChoices: TestChoices): number {
+    const testTypes = this.getTestTypeList(testChoices);
+    return this.questionList().filter(q => (q.id.test in testTypes)).length;
+  }
+
+  public getUnansweredTestQuestionCount(testChoices: TestChoices): number {
+    const testTypes = this.getTestTypeList(testChoices);
+    return this.getUnansweredQuestions().filter(q => (q.id.test in testTypes)).length;
+  }
+
   public getUnansweredQuestions() {
     return this.questionList()
       .filter(q => (q.answer === undefined));
@@ -82,6 +83,18 @@ export class TestService {
   public getAnsweredQuestions() {
     return this.questionList()
       .filter(q => (q.answer !== undefined));
+  }
+
+  answerQuestion<Q extends Question<A>,A>(question: Q,answer: A): boolean {
+    const map = {...this.questionMap()};
+    const questionId: QuestionId = question.id;
+    const index = map[questionId.test].findIndex(q => (q.id.num === questionId.num));
+    if(index !== -1) {
+      (map[questionId.test][index] as Q).answer = answer;
+      this.questionMap.update(() => map);
+      return true;
+    }
+    return false;
   }
 
   private shuffle(questions: Array<AllQuestionTypes>): Array<AllQuestionTypes> {

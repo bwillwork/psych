@@ -17,7 +17,7 @@ export type FiveMultipleChoiceAnswer = FiveMultipleChoiceKeys | undefined;
 export type TestType = 'bigFive' | 'myersBrigs' | 'pen' | 'fiveModern' | 'seduction' | 'sixStyles';
 
 export type QuestionId = {
-  id: number,
+  num: number,
   test: TestType
 };
 
@@ -103,12 +103,11 @@ export interface BigFiveResult {
 }
 
 export interface QuestionService<Q extends Question<A>,A> {
-  answerQuestion(questions:Array<Q>,answer: A): boolean;
+  answerQuestion<Q extends Question<A>,A>(questions:Array<Q>,answer: A): boolean;
 }
 
 export interface EvaluatorService<Q extends Question<A>,A,R> {
   evaluate(questions: Array<Q>): R;
-  isFinished(questions: Array<Q>): boolean
 }
 
 export type TestChoices = {
