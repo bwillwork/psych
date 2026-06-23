@@ -12,7 +12,6 @@ export class TestChoiceService {
 
   private readonly store = inject(Store);
 
-
   public hasStartedTest(): Signal<boolean> {
     return this.store.selectSignal(selectHasStartedTest);
   }

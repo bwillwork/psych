@@ -43,8 +43,10 @@ export const selectHasStartedTest = createSelector(
   selectTestChoices,
   (choices) => {
     const values = Object.values(choices);
-    return values.reduce((agg,val) => {
-      return agg && val;
-    },true);
+    const result = values.reduce((agg,val) => {
+      return agg || val;
+    },false);
+    console.log(choices,result);
+    return result;
   }
 );
