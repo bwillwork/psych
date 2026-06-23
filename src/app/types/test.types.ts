@@ -145,3 +145,10 @@ export interface TestState {
   currentQuestion: AllQuestionTypes | undefined
 }
 
+// NgRx
+export interface AppState {
+  bigFive: Array<FiveScaleQuestion>;
+  myersBrigs: Array<TwoMultipleChoiceQuestion>;
+  pen: Array<TrueFalseQuestion>;
+  choices: TestChoices
+}

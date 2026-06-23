@@ -20,6 +20,7 @@ export class TestPage implements OnDestroy {
   private testService = inject(TestService);
   private router = inject(Router);
   private choices = this.testChoiceService.getTestChoices();
+  private hasStartedTest = this.testChoiceService.hasStartedTest();
 
   private subs: Array<Subscription> = [];
 
