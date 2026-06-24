@@ -1,8 +1,8 @@
-import { createReducer, on } from '@ngrx/store';
-import { answerQuestion, resetQuestions } from '../actions/pen.actions';
-import {initPenQuestions} from '../../util/question.util';
+import {createReducer, on} from '@ngrx/store';
+import {answerQuestion, resetQuestions} from '../../actions/romantic/fiveModernRel.actions';
+import {initFiveModernQuestions} from '../../../util/question.util';
 
-export const initialState = initPenQuestions();
+export const initialState = initFiveModernQuestions();
 
 export const fiveModernRelReducer = createReducer(
   initialState,

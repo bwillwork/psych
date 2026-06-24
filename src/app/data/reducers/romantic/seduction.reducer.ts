@@ -1,8 +1,8 @@
-import { createReducer, on } from '@ngrx/store';
-import { answerQuestion, resetQuestions } from '../actions/myersBrigs.actions';
-import {initMyersBrigsQuestions} from '../../util/question.util';
+import {createReducer, on} from '@ngrx/store';
+import {answerQuestion, resetQuestions} from '../../actions/romantic/seduction.actions';
+import {initSeductionQuestions} from '../../../util/question.util';
 
-export const initialState = initMyersBrigsQuestions();
+export const initialState = initSeductionQuestions();
 
 export const seductionReducer = createReducer(
   initialState,

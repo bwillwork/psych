@@ -1,7 +1,7 @@
 import {createAction, props} from '@ngrx/store';
 import {FiveScaleAnswer, QuestionId} from '../../../types/test.types';
 
-const testKey = '[Big Five]';
+const testKey = '[Six Styles]';
 
 export const SixStylesActions = {
   answerQuestion: `${testKey} Answer Question`,

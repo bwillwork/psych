@@ -124,6 +124,7 @@ export type TestQuestionMap = {
   bigFive: Array<FiveScaleQuestion>,
   myersBrigs: Array<TwoMultipleChoiceQuestion>,
   pen: Array<TrueFalseQuestion>,
+
   fiveModern: Array<FiveMultipleChoiceQuestion>,
   seduction: Array<FourMultipleChoiceQuestion>,
   sixStyles: Array<FiveScaleQuestion>

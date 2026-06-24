@@ -1,8 +1,8 @@
-import { createReducer, on } from '@ngrx/store';
-import { answerQuestion, resetQuestions } from '../actions/bigFive.actions';
-import {initBigFiveQuestions} from '../../util/question.util';
+import {createReducer, on} from '@ngrx/store';
+import {answerQuestion, resetQuestions} from '../../actions/romantic/sixStyles.actions';
+import {initSixStylesQuestions} from '../../../util/question.util';
 
-export const initialState = initBigFiveQuestions();
+export const initialState = initSixStylesQuestions();
 
 export const sixStylesReducer = createReducer(
   initialState,
