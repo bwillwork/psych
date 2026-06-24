@@ -22,9 +22,10 @@ export type QuestionId = {
 };
 
 export interface Question <A> {
-  id: QuestionId,
-  question: string
-  answer: A
+  id: QuestionId;
+  question: string;
+  answeredDate?: Date;
+  answer: A;
 }
 
 export interface TrueFalseQuestion extends Question<TrueFalseAnswer> {}
