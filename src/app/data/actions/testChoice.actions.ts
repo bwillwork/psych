@@ -1,5 +1,5 @@
 import {createAction, props} from '@ngrx/store';
-import {QuestionId, TestChoices, TrueFalseAnswer, TwoMultipleChoiceAnswer} from '../../types/test.types';
+import {TestChoices} from '../../types/test.types';
 
 const testKey = '[Test Choices]';
 

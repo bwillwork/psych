@@ -25,7 +25,7 @@ export interface Question <A> {
   id: QuestionId;
   question: string;
   answeredDate?: Date;
-  answer: A;
+  answer: A | undefined;
 }
 
 export interface TrueFalseQuestion extends Question<TrueFalseAnswer> {}
@@ -152,5 +152,10 @@ export interface AppState {
   bigFive: Array<FiveScaleQuestion>;
   myersBrigs: Array<TwoMultipleChoiceQuestion>;
   pen: Array<TrueFalseQuestion>;
+
+  fiveModern: Array<FiveMultipleChoiceQuestion>,
+  seduction: Array<FourMultipleChoiceQuestion>,
+  sixStyles: Array<FiveScaleQuestion>
+
   choices: TestChoices
 }

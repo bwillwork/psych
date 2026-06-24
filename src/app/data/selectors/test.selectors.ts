@@ -4,18 +4,29 @@ import {AllQuestionTypes, AppState} from '../../types/test.types';
 export const selectBigFiveTest = (state: AppState) => state.bigFive;
 export const selectMyersBrigsTest = (state: AppState) => state.myersBrigs;
 export const selectPenTest = (state: AppState) => state.pen;
+
+export const selectFiveModernRelTest = (state: AppState) => state.fiveModern;
+export const selectSeductionTest = (state: AppState) => state.seduction;
+export const selectSixStylesTest = (state: AppState) => state.sixStyles;
+
 export const selectTestChoices = (state: AppState) => state.choices;
 
+export const selectAllTestsMap = (state: AppState) => {
+  const {choices,...testData} = state;
+  return {...testData};
+};
+
 export const selectTest = createSelector(
-  selectBigFiveTest,
-  selectMyersBrigsTest,
-  selectPenTest,
+  selectAllTestsMap,
   selectTestChoices,
-  (bigFive,myersBrigs,pen,choices) => {
+  (
+    testMap,
+    choices) => {
     let result: Array<AllQuestionTypes> = [];
-    if(choices.bigFive) result = result.concat(bigFive)
-    if(choices.myersBrigs) result = result.concat(myersBrigs)
-    if(choices.pen) result = result.concat(pen)
+    const keys = Object.keys(choices) as Array<keyof typeof choices>;
+    for(const key of keys) {
+      if(choices[key]) result = result.concat(testMap[key]);
+    }
     return result;
   }
 );
