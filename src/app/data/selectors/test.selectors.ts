@@ -31,14 +31,20 @@ export const selectTest = createSelector(
   }
 );
 
-export const selectAnsweredQuestions = createSelector(
-  selectTest,
-  (test) => test.filter(q => q.answer !== undefined)
-);
-
 export const selectUnansweredQuestions = createSelector(
   selectTest,
   (test) => test.filter(q => q.answer === undefined)
+);
+
+export const selectAnsweredQuestions = createSelector(
+  selectTest,
+  (test) => {
+    return test.filter(q => q.answer !== undefined)
+      .sort((a,b) => {
+        // Sorting in the order they were answered
+        return (a.answeredDate && b.answeredDate) ? a.answeredDate.getTime() - b.answeredDate.getTime() : 0
+      })
+  }
 );
 
 export const selectRandomUnansweredQuestion = createSelector(

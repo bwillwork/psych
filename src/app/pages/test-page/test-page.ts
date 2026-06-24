@@ -22,6 +22,7 @@ export class TestPage implements OnDestroy {
   private choices = this.store.selectSignal(selectTestChoices);
   private hasStartedTest = this.store.selectSignal(selectHasStartedTest);
 
+
   private subs: Array<Subscription> = [];
 
 
