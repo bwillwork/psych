@@ -4,7 +4,11 @@ import {TestService} from '../../services/test/test-service';
 import {Subscription} from 'rxjs';
 import {TestState} from '../../types/test.types';
 import {Store} from '@ngrx/store';
-import {selectHasStartedTest, selectTestChoices} from '../../data/selectors/test.selectors';
+import {
+  selectHasStartedTest,
+  selectRandomUnansweredQuestion,
+  selectTestChoices
+} from '../../data/selectors/test.selectors';
 
 @Component({
   selector: 'app-test-page',
@@ -21,13 +25,13 @@ export class TestPage implements OnDestroy {
   private router = inject(Router);
   private choices = this.store.selectSignal(selectTestChoices);
   private hasStartedTest = this.store.selectSignal(selectHasStartedTest);
-
-
   private subs: Array<Subscription> = [];
+
+  currentQuestion = this.store.selectSignal(selectRandomUnansweredQuestion);
 
 
   constructor() {
-    this.testService.initTest(this.choices());
+
     this.subs.push(this.testService.observeTestState().subscribe((testState: TestState) => {
 
     }));
