@@ -2,13 +2,13 @@
   <div class="form-group">
     <h2>{{question().question}}</h2>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" [value]="true">
+      <input class="form-check-input" type="radio" name="radio" formControlName="radio" [value]="true">
       <label class="form-check-label">
         True
       </label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="exampleRadios" [value]="false">
+      <input class="form-check-input" type="radio" name="radio" formControlName="radio" [value]="false">
       <label class="form-check-label">
         False
       </label>
