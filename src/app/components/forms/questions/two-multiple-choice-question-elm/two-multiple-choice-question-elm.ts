@@ -7,6 +7,7 @@ import {
 } from '../../../../types/test.types';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-two-multiple-choice-question-elm',
@@ -36,7 +37,9 @@ export class TwoMultipleChoiceQuestionElm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
-      this.onValueChange.emit(formData.radio as TwoMultipleChoiceAnswer);
+      const answer = formData.radio as TwoMultipleChoiceAnswer;
+      this.form.controls['radio'].reset(null,{emitEvent: false, onlySelf: true});
+      this.onValueChange.emit(answer);
     }))
   }
 

@@ -6,6 +6,7 @@ import {
 } from '../../../../types/test.types';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-five-multiple-choice-question-elm',
@@ -26,7 +27,6 @@ export class FiveMultipleChoiceQuestionElm implements OnInit, OnDestroy {
 
   private fb: FormBuilder = inject(FormBuilder);
   private subs: Array<Subscription> = [];
-
   form = this.fb.group({
     radio: ['']
   });
@@ -35,6 +35,7 @@ export class FiveMultipleChoiceQuestionElm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
+      this.form.controls['radio'].reset(null,{emitEvent: false, onlySelf: true});
       this.onValueChange.emit(formData.radio as FiveMultipleChoiceAnswer);
     }))
   }

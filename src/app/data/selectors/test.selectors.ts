@@ -1,14 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import {AllQuestionTypes, AppState} from '../../types/test.types';
 
-export const selectBigFiveTest = (state: AppState) => state.bigFive;
-export const selectMyersBrigsTest = (state: AppState) => state.myersBrigs;
-export const selectPenTest = (state: AppState) => state.pen;
-
-export const selectFiveModernRelTest = (state: AppState) => state.fiveModern;
-export const selectSeductionTest = (state: AppState) => state.seduction;
-export const selectSixStylesTest = (state: AppState) => state.sixStyles;
-
 export const selectTestChoices = (state: AppState) => state.choices;
 
 export const selectAllTestsMap = (state: AppState) => {
@@ -76,5 +68,13 @@ export const selectHasStartedTest = createSelector(
     },false);
     console.log(choices,result);
     return result;
+  }
+);
+
+export const selectIsFinished = createSelector(
+  selectAllQuestionCount,
+  selectAnsweredQuestionCount,
+  (total,answered) => {
+    return total > 0 && total === answered;
   }
 );

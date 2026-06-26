@@ -4,19 +4,24 @@
     <div class="progress-bar" [style]="`width: ${percentageAnswered()}%`">{{percentageAnswered()}}%</div>
   </div>
   <div>
-    @if(currentTestType() === 'pen') {
-      <app-true-false-question-elm [question]="castToTrueFalseQuestion(currentQuestion())" (onValueChange)="answerTrueFalseQuestion($event)"></app-true-false-question-elm>
-    } @else if (currentTestType() === 'sixStyles' || currentTestType() === 'bigFive') {
-      <app-five-scale-question-elm [question]="castToFiveScaleQuestion(currentQuestion())" (onValueChange)="answerFiveScaleQuestion($event)"></app-five-scale-question-elm>
-    } @else if (currentTestType() === 'myersBrigs') {
-      <app-two-multiple-choice-question-elm [question]="castToTwoMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerTwoMultipleChoiceQuestion($event)"></app-two-multiple-choice-question-elm>
-    } @else if (currentTestType() === 'seduction') {
-      <app-four-multiple-choice-question-elm [question]="castToFourMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerFourMultipleChoiceQuestion($event)"></app-four-multiple-choice-question-elm>
-    } @else {
-      <app-five-multiple-choice-question-elm [question]="castToFiveMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerFiveMultipleChoiceQuestion($event)"></app-five-multiple-choice-question-elm>
+    @if(currentQuestion()) {
+      @if(currentTestType() === 'pen') {
+        <app-true-false-question-elm [question]="castToTrueFalseQuestion(currentQuestion())" (onValueChange)="answerTrueFalseQuestion($event)"></app-true-false-question-elm>
+      } @else if (currentTestType() === 'sixStyles' || currentTestType() === 'bigFive') {
+        <app-five-scale-question-elm [question]="castToFiveScaleQuestion(currentQuestion())" (onValueChange)="answerFiveScaleQuestion($event)"></app-five-scale-question-elm>
+      } @else if (currentTestType() === 'myersBrigs') {
+        <app-two-multiple-choice-question-elm [question]="castToTwoMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerTwoMultipleChoiceQuestion($event)"></app-two-multiple-choice-question-elm>
+      } @else if (currentTestType() === 'seduction') {
+        <app-four-multiple-choice-question-elm [question]="castToFourMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerFourMultipleChoiceQuestion($event)"></app-four-multiple-choice-question-elm>
+      } @else {
+        <app-five-multiple-choice-question-elm [question]="castToFiveMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerFiveMultipleChoiceQuestion($event)"></app-five-multiple-choice-question-elm>
+      }
     }
   </div>
 </div>
 
-
-<button (click)="seeResults()">See Results</button>
+<!--
+@if(isFinished()) {
+  <button (click)="seeResults()">See Results</button>
+}
+-->

@@ -1,21 +1,26 @@
-import {Component, computed, inject, OnDestroy, signal} from '@angular/core';
+import {Component, computed, inject, OnDestroy} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {
-  AllQuestionTypes, FiveMultipleChoiceAnswer,
-  FiveMultipleChoiceQuestion, FiveScaleAnswer,
-  FiveScaleQuestion, FourMultipleChoiceAnswer,
-  FourMultipleChoiceQuestion, TrueFalseAnswer,
-  TrueFalseQuestion, TwoMultipleChoiceAnswer,
+  AllQuestionTypes,
+  FiveMultipleChoiceAnswer,
+  FiveMultipleChoiceQuestion,
+  FiveScaleAnswer,
+  FiveScaleQuestion,
+  FourMultipleChoiceAnswer,
+  FourMultipleChoiceQuestion,
+  TrueFalseAnswer,
+  TrueFalseQuestion,
+  TwoMultipleChoiceAnswer,
   TwoMultipleChoiceQuestion
 } from '../../types/test.types';
 import {Store} from '@ngrx/store';
 import {
   selectAllQuestionCount,
   selectAnsweredQuestionCount,
-  selectHasStartedTest,
+  selectHasStartedTest, selectIsFinished,
   selectRandomUnansweredQuestion,
-  selectTestChoices
+
 } from '../../data/selectors/test.selectors';
 import {toObservable} from '@angular/core/rxjs-interop';
 import {TrueFalseQuestionElm} from '../../components/forms/questions/true-false-question-elm/true-false-question-elm';
@@ -29,6 +34,7 @@ import {
 import {
   FiveMultipleChoiceQuestionElm
 } from '../../components/forms/questions/five-multiple-choice-question-elm/five-multiple-choice-question-elm';
+
 import * as bigFiveActions from '../../data/actions/personality/bigFive.actions';
 import * as myersBrigsActions from '../../data/actions/personality/myersBrigs.actions';
 import * as penActions from '../../data/actions/personality/pen.actions';
@@ -49,39 +55,44 @@ import * as sixStylesActions from '../../data/actions/romantic/sixStyles.actions
   templateUrl: './test-page.html',
   styleUrl: './test-page.css',
 })
-class TestPage implements OnDestroy {
+export class TestPage implements OnDestroy {
 
 
 
   private readonly store = inject(Store);
   private router = inject(Router);
-  private choices = this.store.selectSignal(selectTestChoices);
+
+
   private hasStartedTest = this.store.selectSignal(selectHasStartedTest);
   private subs: Array<Subscription> = [];
 
   currentQuestion = this.store.selectSignal(selectRandomUnansweredQuestion);
   currentTestType = computed(() => {
-    return this.currentQuestion().id.test;
+    const question = this.currentQuestion();
+    return (question) ? question.id.test : "bigFive";
   });
   totalQuestionCount = this.store.selectSignal(selectAllQuestionCount);
   answeredQuestionCount = this.store.selectSignal(selectAnsweredQuestionCount);
   percentageAnswered = computed(() => {
-    return Math.floor(this.answeredQuestionCount() / this.totalQuestionCount());
+    console.log('changed num: ',Math.floor((this.answeredQuestionCount() / this.totalQuestionCount()) * 100));
+    return Math.floor((this.answeredQuestionCount() / this.totalQuestionCount()) * 100);
   });
+
+  private isFinished$ = toObservable(this.store.selectSignal(selectIsFinished));
+
 
   constructor() {
     if(!this.hasStartedTest()) {
       this.router.navigate([""]);// Go back home if the test hasn't started
     } else {
+      this.subs.push(this.isFinished$.subscribe((finished) => {
+        console.log('is finished: ',finished);
+        if(finished) this.router.navigate(["/results"]);
+      }));
       this.subs.push(toObservable(this.currentQuestion).subscribe((question) => {
         console.log('new question: ', question);
       }));
     }
-  }
-
-  seeResults() {
-    const canViewResults = false;
-    if(canViewResults) this.router.navigate(["/results"]);
   }
 
   ngOnDestroy(): void {
@@ -135,7 +146,6 @@ class TestPage implements OnDestroy {
     }
   }
 
-
   castToTrueFalseQuestion(question: AllQuestionTypes): TrueFalseQuestion {
     return question as TrueFalseQuestion;
   }
@@ -157,5 +167,3 @@ class TestPage implements OnDestroy {
   }
 
 }
-
-export default TestPage

@@ -11,8 +11,6 @@ export function answer<Q extends Question<A>,A>(
   const index = result.findIndex(q => q.id.num === id.num && q.id.test === id.test);
   if(index !== -1) {
     result[index] = {...result[index],answer,answeredDate: new Date()};
-    //result[index].answer = answer;
-    //result[index].answeredDate = new Date();
   }
   return result;
 }
