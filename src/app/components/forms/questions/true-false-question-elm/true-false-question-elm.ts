@@ -1,5 +1,10 @@
 import {Component, inject, input, OnDestroy, OnInit, output} from '@angular/core';
-import {TrueFalseAnswer, TrueFalseQuestion, TwoMultipleChoiceAnswer} from '../../../../types/test.types';
+import {
+  FiveMultipleChoiceAnswer,
+  TrueFalseAnswer,
+  TrueFalseQuestion,
+  TwoMultipleChoiceAnswer
+} from '../../../../types/test.types';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
 
@@ -25,6 +30,7 @@ export class TrueFalseQuestionElm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
+      this.onValueChange.emit(formData.radio as TrueFalseAnswer);
     }))
   }
 

@@ -7,18 +7,20 @@ export function initTestChoices(): TestChoices {
 export function answer<Q extends Question<A>,A>(
   state: Array<Q>,
   {id,answer}: {id: QuestionId,answer: A}): Array<Q> {
-  const index = state.findIndex(q => q.id.num === id.num && q.id.test === id.test);
+  const result = [...state];
+  const index = result.findIndex(q => q.id.num === id.num && q.id.test === id.test);
   if(index !== -1) {
-    state[index].answer = answer;
-    state[index].answeredDate = new Date();
+    result[index] = {...result[index],answer,answeredDate: new Date()};
+    //result[index].answer = answer;
+    //result[index].answeredDate = new Date();
   }
-  return [...state];
+  return result;
 }
 
 export function reset<Q extends Question<A>,A>(state: Array<Q>): Array<Q> {
-  for(const q of state) {
-    q.answer = undefined;
-    q.answeredDate = new Date();
+  const result = [...state];
+  for(const r in result) {
+    result[r] = {...result[r],answer: undefined, answeredDate: undefined};
   }
-  return [...state];
+  return result;
 }

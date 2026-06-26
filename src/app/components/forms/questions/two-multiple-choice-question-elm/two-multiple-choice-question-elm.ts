@@ -1,6 +1,6 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, output} from '@angular/core';
 import {
-  FourMultipleChoiceAnswer,
+  FourMultipleChoiceAnswer, TrueFalseAnswer,
   TwoMultipleChoiceAnswer,
   TwoMultipleChoiceKeys,
   TwoMultipleChoiceQuestion
@@ -36,6 +36,7 @@ export class TwoMultipleChoiceQuestionElm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
+      this.onValueChange.emit(formData.radio as TwoMultipleChoiceAnswer);
     }))
   }
 

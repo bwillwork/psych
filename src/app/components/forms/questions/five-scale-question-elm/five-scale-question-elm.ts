@@ -30,6 +30,7 @@ export class FiveScaleQuestionElm implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
+      this.onValueChange.emit(formData.radio as FiveScaleAnswer);
     }))
   }
 

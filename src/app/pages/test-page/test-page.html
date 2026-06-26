@@ -5,20 +5,16 @@
   </div>
   <div>
     @if(currentTestType() === 'pen') {
-      <app-true-false-question-elm [question]="castToTrueFalseQuestion(currentQuestion())"></app-true-false-question-elm>
+      <app-true-false-question-elm [question]="castToTrueFalseQuestion(currentQuestion())" (onValueChange)="answerTrueFalseQuestion($event)"></app-true-false-question-elm>
     } @else if (currentTestType() === 'sixStyles' || currentTestType() === 'bigFive') {
-      <app-five-scale-question-elm [question]="castToFiveScaleQuestion(currentQuestion())"></app-five-scale-question-elm>
+      <app-five-scale-question-elm [question]="castToFiveScaleQuestion(currentQuestion())" (onValueChange)="answerFiveScaleQuestion($event)"></app-five-scale-question-elm>
     } @else if (currentTestType() === 'myersBrigs') {
-      <app-two-multiple-choice-question-elm [question]="castToTwoMultipleChoiceQuestion(currentQuestion())"></app-two-multiple-choice-question-elm>
+      <app-two-multiple-choice-question-elm [question]="castToTwoMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerTwoMultipleChoiceQuestion($event)"></app-two-multiple-choice-question-elm>
     } @else if (currentTestType() === 'seduction') {
-      <app-four-multiple-choice-question-elm [question]="castToFourMultipleChoiceQuestion(currentQuestion())"></app-four-multiple-choice-question-elm>
+      <app-four-multiple-choice-question-elm [question]="castToFourMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerFourMultipleChoiceQuestion($event)"></app-four-multiple-choice-question-elm>
     } @else {
-      <app-five-multiple-choice-question-elm [question]="castToFiveMultipleChoiceQuestion(currentQuestion())"></app-five-multiple-choice-question-elm>
+      <app-five-multiple-choice-question-elm [question]="castToFiveMultipleChoiceQuestion(currentQuestion())" (onValueChange)="answerFiveMultipleChoiceQuestion($event)"></app-five-multiple-choice-question-elm>
     }
-  </div>
-  <div>
-    <button (click)="previous()">Previous</button>
-    <button (click)="next()">Next</button>
   </div>
 </div>
 

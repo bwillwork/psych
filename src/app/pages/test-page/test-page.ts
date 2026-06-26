@@ -1,12 +1,12 @@
-import {Component, computed, inject, OnDestroy} from '@angular/core';
+import {Component, computed, inject, OnDestroy, signal} from '@angular/core';
 import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {
-  AllQuestionTypes,
-  FiveMultipleChoiceQuestion,
-  FiveScaleQuestion,
-  FourMultipleChoiceQuestion,
-  TrueFalseQuestion,
+  AllQuestionTypes, FiveMultipleChoiceAnswer,
+  FiveMultipleChoiceQuestion, FiveScaleAnswer,
+  FiveScaleQuestion, FourMultipleChoiceAnswer,
+  FourMultipleChoiceQuestion, TrueFalseAnswer,
+  TrueFalseQuestion, TwoMultipleChoiceAnswer,
   TwoMultipleChoiceQuestion
 } from '../../types/test.types';
 import {Store} from '@ngrx/store';
@@ -29,7 +29,13 @@ import {
 import {
   FiveMultipleChoiceQuestionElm
 } from '../../components/forms/questions/five-multiple-choice-question-elm/five-multiple-choice-question-elm';
+import * as bigFiveActions from '../../data/actions/personality/bigFive.actions';
+import * as myersBrigsActions from '../../data/actions/personality/myersBrigs.actions';
+import * as penActions from '../../data/actions/personality/pen.actions';
 
+import * as fiveModernRelActions from '../../data/actions/romantic/fiveModernRel.actions';
+import * as seductionActions from '../../data/actions/romantic/seduction.actions';
+import * as sixStylesActions from '../../data/actions/romantic/sixStyles.actions';
 
 @Component({
   selector: 'app-test-page',
@@ -64,28 +70,71 @@ class TestPage implements OnDestroy {
   });
 
   constructor() {
-    this.subs.push(toObservable(this.currentQuestion).subscribe((question) => {
-
-    }));
+    if(!this.hasStartedTest()) {
+      this.router.navigate([""]);// Go back home if the test hasn't started
+    } else {
+      this.subs.push(toObservable(this.currentQuestion).subscribe((question) => {
+        console.log('new question: ', question);
+      }));
+    }
   }
 
   seeResults() {
-    const canViewResults = false;//this.testService.canViewResults();
+    const canViewResults = false;
     if(canViewResults) this.router.navigate(["/results"]);
-  }
-
-  previous() {
-
-  }
-
-  next() {
-
   }
 
   ngOnDestroy(): void {
     this.subs.forEach(s => s.unsubscribe());
     this.subs = [];
   }
+
+
+  answerTrueFalseQuestion(answer: TrueFalseAnswer) {
+    console.log(answer);
+    if(answer !== undefined) {
+      const id = this.currentQuestion().id;
+      this.store.dispatch(penActions.answerQuestion({id,answer}));
+    }
+  }
+
+  answerFiveScaleQuestion(answer: FiveScaleAnswer) {
+    console.log(answer);
+    if(answer !== undefined) {
+      const id = this.currentQuestion().id;
+      const testType = this.currentTestType();
+      if(testType === 'bigFive') {
+        this.store.dispatch(bigFiveActions.answerQuestion({id,answer}));
+      } else {
+        this.store.dispatch(sixStylesActions.answerQuestion({id,answer}));
+      }
+    }
+  }
+
+  answerTwoMultipleChoiceQuestion(answer: TwoMultipleChoiceAnswer) {
+    console.log(answer);
+    if(answer !== undefined) {
+      const id = this.currentQuestion().id;
+      this.store.dispatch(myersBrigsActions.answerQuestion({id,answer}));
+    }
+  }
+
+  answerFourMultipleChoiceQuestion(answer: FourMultipleChoiceAnswer) {
+    console.log(answer);
+    if(answer !== undefined) {
+      const id = this.currentQuestion().id;
+      this.store.dispatch(seductionActions.answerQuestion({id,answer}));
+    }
+  }
+
+  answerFiveMultipleChoiceQuestion(answer: FiveMultipleChoiceAnswer) {
+    console.log(answer);
+    if(answer !== undefined) {
+      const id = this.currentQuestion().id;
+      this.store.dispatch(fiveModernRelActions.answerQuestion({id,answer}));
+    }
+  }
+
 
   castToTrueFalseQuestion(question: AllQuestionTypes): TrueFalseQuestion {
     return question as TrueFalseQuestion;
