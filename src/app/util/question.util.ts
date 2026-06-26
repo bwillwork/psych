@@ -1,4 +1,5 @@
 import {
+  AllQuestionTypes,
   FiveMultipleChoiceQuestion,
   FiveMultipleChoiceResponses,
   FiveScaleQuestion,
@@ -38,27 +39,6 @@ export function initFourMultipleChoiceQuestion(id: number,test: TestType,questio
 
 export function initFiveMultipleChoiceQuestion(id: number,test: TestType,question: string, responses:FiveMultipleChoiceResponses): FiveMultipleChoiceQuestion {
   return { id:{num: id,test},question, responses, answer: undefined};
-}
-
-// Cast Helpers
-export function castToTrueFalseQuestion(question: any): TrueFalseQuestion {
-  return question as TrueFalseQuestion;
-}
-
-export function castToFiveScaleQuestion(question: any): FiveScaleQuestion {
-  return question as FiveScaleQuestion;
-}
-
-export function castToTwoMultipleChoiceQuestion(question: any): TwoMultipleChoiceQuestion {
-  return question as TwoMultipleChoiceQuestion;
-}
-
-export function castToTFourMultipleChoiceQuestion(question: any): FourMultipleChoiceQuestion {
-  return question as FourMultipleChoiceQuestion;
-}
-
-export function castToFiveMultipleChoiceQuestion(question: any): FiveMultipleChoiceQuestion {
-  return question as FiveMultipleChoiceQuestion;
 }
 
 

@@ -1,15 +1,24 @@
 
 <div class="d-flex flex-column">
-  <div class="progress" role="progressbar" aria-label="Example with label" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar" style="width: 25%">25%</div>
+  <div class="progress" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar" [style]="`width: ${percentageAnswered()}%`">{{percentageAnswered()}}%</div>
   </div>
   <div>
-    <p>Question goes here</p>
-    <p>{{currentQuestion().question}}</p>
+    @if(currentTestType() === 'pen') {
+      <app-true-false-question-elm [question]="castToTrueFalseQuestion(currentQuestion())"></app-true-false-question-elm>
+    } @else if (currentTestType() === 'sixStyles' || currentTestType() === 'bigFive') {
+      <app-five-scale-question-elm [question]="castToFiveScaleQuestion(currentQuestion())"></app-five-scale-question-elm>
+    } @else if (currentTestType() === 'myersBrigs') {
+      <app-two-multiple-choice-question-elm [question]="castToTwoMultipleChoiceQuestion(currentQuestion())"></app-two-multiple-choice-question-elm>
+    } @else if (currentTestType() === 'seduction') {
+      <app-four-multiple-choice-question-elm [question]="castToFourMultipleChoiceQuestion(currentQuestion())"></app-four-multiple-choice-question-elm>
+    } @else {
+      <app-five-multiple-choice-question-elm [question]="castToFiveMultipleChoiceQuestion(currentQuestion())"></app-five-multiple-choice-question-elm>
+    }
   </div>
   <div>
-    <button>Previous</button>
-    <button>Next</button>
+    <button (click)="previous()">Previous</button>
+    <button (click)="next()">Next</button>
   </div>
 </div>
 

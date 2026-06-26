@@ -31,6 +31,12 @@ export const selectTest = createSelector(
   }
 );
 
+
+export const selectAllQuestionCount = createSelector(
+  selectTest,
+  (test) => test.length
+);
+
 export const selectUnansweredQuestions = createSelector(
   selectTest,
   (test) => test.filter(q => q.answer === undefined)
@@ -45,6 +51,11 @@ export const selectAnsweredQuestions = createSelector(
         return (a.answeredDate && b.answeredDate) ? a.answeredDate.getTime() - b.answeredDate.getTime() : 0
       })
   }
+);
+
+export const selectAnsweredQuestionCount = createSelector(
+  selectAnsweredQuestions,
+  (test) => test.length
 );
 
 export const selectRandomUnansweredQuestion = createSelector(

@@ -1,5 +1,5 @@
 import {Component, input} from '@angular/core';
-import {TrueFalseQuestion, TwoMultipleChoiceQuestion} from '../../../../types/test.types';
+import {TrueFalseQuestion} from '../../../../types/test.types';
 
 @Component({
   selector: 'app-true-false-question-elm',

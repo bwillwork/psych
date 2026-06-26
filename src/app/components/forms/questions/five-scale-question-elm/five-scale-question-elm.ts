@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, computed, input} from '@angular/core';
+import {FiveScaleChoice, FiveScaleQuestion} from '../../../../types/test.types';
 
 @Component({
   selector: 'app-five-scale-question-elm',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   templateUrl: './five-scale-question-elm.html',
   styleUrl: './five-scale-question-elm.css',
 })
-export class FiveScaleQuestionElm {}
+export class FiveScaleQuestionElm {
+  question = input.required<FiveScaleQuestion>();
+
+}

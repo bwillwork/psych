@@ -1,6 +1,6 @@
 import {ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot, Routes} from '@angular/router';
 import {HomePage} from './pages/home-page/home-page';
-import {TestPage} from './pages/test-page/test-page';
+import TestPage from './pages/test-page/test-page';
 import {ResultsPage} from './pages/results-page/results-page';
 import {MethodologyPage} from './pages/methodology-page/methodology-page';
 import {inject} from '@angular/core';
