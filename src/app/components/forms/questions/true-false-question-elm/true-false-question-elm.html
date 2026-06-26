@@ -1,15 +1,17 @@
-<div class="form-group">
-  <h2>{{question().question}}</h2>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" [value]="true">
-    <label class="form-check-label">
-      True
-    </label>
+<form [formGroup]="form">
+  <div class="form-group">
+    <h2>{{question().question}}</h2>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="exampleRadios" [value]="true">
+      <label class="form-check-label">
+        True
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="exampleRadios" [value]="false">
+      <label class="form-check-label">
+        False
+      </label>
+    </div>
   </div>
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="exampleRadios" [value]="false">
-    <label class="form-check-label">
-      False
-    </label>
-  </div>
-</div>
+</form>
