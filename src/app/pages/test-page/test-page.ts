@@ -57,8 +57,6 @@ import * as sixStylesActions from '../../data/actions/romantic/sixStyles.actions
 })
 export class TestPage implements OnDestroy {
 
-
-
   private readonly store = inject(Store);
   private router = inject(Router);
 

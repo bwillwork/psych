@@ -4,16 +4,17 @@ import {TestPage} from './pages/test-page/test-page';
 import {ResultsPage} from './pages/results-page/results-page';
 import {MethodologyPage} from './pages/methodology-page/methodology-page';
 import {inject} from '@angular/core';
-import {TestService} from './services/test/test-service';
-
+import {Store} from '@ngrx/store';
+import {selectIsFinished} from './data/selectors/test.selectors';
 
 
 export const viewResultsGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  const testService = inject(TestService);
-  return true;//testService.canViewResults();
+  const store = inject(Store);
+  const isFinished = store.selectSignal(selectIsFinished)
+  return isFinished();
 };
 
 export const routes: Routes = [
