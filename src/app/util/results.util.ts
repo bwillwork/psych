@@ -1,10 +1,18 @@
 import {
-  BigFiveResult, FiveModernRelationshipsResult, FiveMultipleChoiceAnswer,
-  FiveMultipleChoiceQuestion, FiveScaleAnswer,
+  BigFiveResult,
+  FiveModernRelationshipsResult,
+  FiveMultipleChoiceAnswer,
+  FiveMultipleChoiceQuestion,
+  FiveScaleAnswer,
   FiveScaleQuestion,
-  FourMultipleChoiceAnswer, FourMultipleChoiceQuestion, MyersBrigsResult, PenTestResult, SeductionArchetypesResult,
+  FourMultipleChoiceAnswer,
+  FourMultipleChoiceQuestion,
+  MyersBrigsResult,
+  PenTestResult,
+  SeductionArchetypesResult,
   SixStylesOfLovingResult,
-  TrueFalseQuestion, TwoMultipleChoiceAnswer, TwoMultipleChoiceKeys,
+  TrueFalseQuestion,
+  TwoMultipleChoiceAnswer,
   TwoMultipleChoiceQuestion
 } from '../types/test.types';
 
