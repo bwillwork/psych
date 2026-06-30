@@ -1,3 +1,6 @@
+import {Component} from '@angular/core';
+import {FiveMultipleChoiceKeys} from './test.types';
+
 export interface SixStylesOfLovingResult {
   eros: number,
   ludus: number,
@@ -7,6 +10,7 @@ export interface SixStylesOfLovingResult {
   agape: number
 }
 
+// Seduction Archetypes
 export interface SeductionArchetypesResult {
   A: number,
   B: number,
@@ -14,6 +18,7 @@ export interface SeductionArchetypesResult {
   D: number
 }
 
+// The Five Modern Relationship Archetypes
 export interface FiveModernRelationshipsResult {
   A: number,
   B: number,
@@ -21,6 +26,18 @@ export interface FiveModernRelationshipsResult {
   D: number,
   E: number
 }
+
+export type FiveModernRelArchetype = "Pleaser" | "Victim" | "Controller" | "Vacillator" | "Secure Connector" | "";
+export type FiveModernRelAnswerToArchetypeMap = {
+  [key in FiveMultipleChoiceKeys]: FiveModernRelArchetype;
+};
+export type FiveModernRelArchetypeProfile = {
+  name: string,
+  archetype: FiveModernRelArchetype,
+  dynamic: string,
+  relationships: string
+};
+
 
 // PEN Personality test
 export interface PenTestResult {
