@@ -1,25 +1,10 @@
 import {Component, computed, input, signal, WritableSignal} from '@angular/core';
-import {MyersBrigsResult} from '../../../../types/result.types';
+import {
+  MyersBrigsIntrovertExtrovert,
+  MyersBrigsJudgingPerceiving, MyersBrigsOption, MyersBrigsResult, MyersBrigsSensingIntuition,
+  MyersBrigsThinkingFeeling
+} from '../../../../types/result.types';
 
-
-export type MyersBrigsIntrovertExtrovert = "I" | "E" | "";
-export type MyersBrigsSensingIntuition = "S" | "N" | "";
-export type MyersBrigsThinkingFeeling = "T" | "F" | "";
-export type MyersBrigsJudgingPerceiving = "J" | "P" | "";
-
-export type MyersBrigsGroup = "Analyst" | "Diplomat" | "Sentinel" | "Explorer" | "";
-
-export interface MyersBrigsOption {
-  energy: MyersBrigsIntrovertExtrovert,
-  information: MyersBrigsSensingIntuition,
-  decisions: MyersBrigsThinkingFeeling,
-  lifestyle: MyersBrigsJudgingPerceiving,
-
-  group: MyersBrigsGroup,
-  name: string,
-  description: string,
-  url: string
-}
 
 const defaultOption: MyersBrigsOption = {
   energy: "",

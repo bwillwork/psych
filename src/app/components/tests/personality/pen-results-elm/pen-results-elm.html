@@ -1,1 +1,22 @@
-<p>pen-results-elm works!</p>
+<h1>PEN Personality Test Results</h1>
+
+<h2>Your Psychoticism (P) Spectrum</h2>
+<h3> Your Score: {{result().psychoticism}}</h3>
+<p>
+  <b>{{psychoticismEvaluation().ranking}} (Score: {{psychoticismEvaluation().spectrum.low}} - {{psychoticismEvaluation().spectrum.low}}): </b>
+  {{psychoticismEvaluation().description}}
+</p>
+
+<h2>Your Extroversion (E) Spectrum</h2>
+<h3> Your Score: {{result().extroversion}}</h3>
+<p>
+  <b>{{extroversionEvaluation().ranking}} (Score: {{extroversionEvaluation().spectrum.low}} - {{extroversionEvaluation().spectrum.low}}): </b>
+  {{extroversionEvaluation().description}}
+</p>
+
+<h2>Your Neuroticism (N) Spectrum</h2>
+<h3> Your Score: {{result().neuroticism}}</h3>
+<p>
+  <b>{{neuroticismEvaluation().ranking}} (Score: {{neuroticismEvaluation().spectrum.low}} - {{neuroticismEvaluation().spectrum.low}}): </b>
+  {{neuroticismEvaluation().description}}
+</p>

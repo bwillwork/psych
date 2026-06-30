@@ -28,6 +28,7 @@ export interface PenTestResult {
   neuroticism: number
 }
 
+// MyersBrigs
 export interface MyersBrigsResult {
   energy: {
     extroversion: number,
@@ -46,6 +47,26 @@ export interface MyersBrigsResult {
     perceiving: number
   }
 }
+
+export type MyersBrigsIntrovertExtrovert = "I" | "E" | "";
+export type MyersBrigsSensingIntuition = "S" | "N" | "";
+export type MyersBrigsThinkingFeeling = "T" | "F" | "";
+export type MyersBrigsJudgingPerceiving = "J" | "P" | "";
+
+export type MyersBrigsGroup = "Analyst" | "Diplomat" | "Sentinel" | "Explorer" | "";
+
+export interface MyersBrigsOption {
+  energy: MyersBrigsIntrovertExtrovert,
+  information: MyersBrigsSensingIntuition,
+  decisions: MyersBrigsThinkingFeeling,
+  lifestyle: MyersBrigsJudgingPerceiving,
+
+  group: MyersBrigsGroup,
+  name: string,
+  description: string,
+  url: string
+}
+
 
 // Big Five
 export interface BigFiveResult {

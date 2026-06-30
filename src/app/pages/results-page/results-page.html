@@ -6,7 +6,7 @@
 }
 @if(choices().myersBrigs) {
   <hr>
-  <app-myers-brigs-results-elm></app-myers-brigs-results-elm>
+  <app-myers-brigs-results-elm [result]="myersBrigs()"></app-myers-brigs-results-elm>
 }
 @if(choices().pen) {
   <hr>
