@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrueFalseQuestionElm } from './true-false-question-elm';
+import { BigFiveResultsElm } from './big-five-results-elm';
 
-describe('TrueFalseQuestionElm', () => {
-  let component: TrueFalseQuestionElm;
-  let fixture: ComponentFixture<TrueFalseQuestionElm>;
+describe('BigFiveResultsElm', () => {
+  let component: BigFiveResultsElm;
+  let fixture: ComponentFixture<BigFiveResultsElm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrueFalseQuestionElm],
+      imports: [BigFiveResultsElm],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TrueFalseQuestionElm);
+    fixture = TestBed.createComponent(BigFiveResultsElm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

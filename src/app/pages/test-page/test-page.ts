@@ -23,17 +23,17 @@ import {
 
 } from '../../data/selectors/test.selectors';
 import {toObservable} from '@angular/core/rxjs-interop';
-import {TrueFalseQuestionElm} from '../../components/forms/questions/true-false-question-elm/true-false-question-elm';
+import {TrueFalseQuestionElm} from '../../components/questions/true-false-question-elm/true-false-question-elm';
 import {
   TwoMultipleChoiceQuestionElm
-} from '../../components/forms/questions/two-multiple-choice-question-elm/two-multiple-choice-question-elm';
-import {FiveScaleQuestionElm} from '../../components/forms/questions/five-scale-question-elm/five-scale-question-elm';
+} from '../../components/questions/two-multiple-choice-question-elm/two-multiple-choice-question-elm';
+import {FiveScaleQuestionElm} from '../../components/questions/five-scale-question-elm/five-scale-question-elm';
 import {
   FourMultipleChoiceQuestionElm
-} from '../../components/forms/questions/four-multiple-choice-question-elm/four-multiple-choice-question-elm';
+} from '../../components/questions/four-multiple-choice-question-elm/four-multiple-choice-question-elm';
 import {
   FiveMultipleChoiceQuestionElm
-} from '../../components/forms/questions/five-multiple-choice-question-elm/five-multiple-choice-question-elm';
+} from '../../components/questions/five-multiple-choice-question-elm/five-multiple-choice-question-elm';
 
 import * as bigFiveActions from '../../data/actions/personality/bigFive.actions';
 import * as myersBrigsActions from '../../data/actions/personality/myersBrigs.actions';

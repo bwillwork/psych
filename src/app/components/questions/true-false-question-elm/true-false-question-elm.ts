@@ -4,7 +4,7 @@ import {
   TrueFalseAnswer,
   TrueFalseQuestion,
   TwoMultipleChoiceAnswer
-} from '../../../../types/test.types';
+} from '../../../types/test.types';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {toObservable} from '@angular/core/rxjs-interop';

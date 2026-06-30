@@ -103,14 +103,7 @@ export interface BigFiveResult {
   neuroticism: number
 }
 
-export interface QuestionService<Q extends Question<A>,A> {
-  answerQuestion<Q extends Question<A>,A>(questions:Array<Q>,answer: A): boolean;
-}
-
-export interface EvaluatorService<Q extends Question<A>,A,R> {
-  evaluate(questions: Array<Q>): R;
-}
-
+// NgRx
 export type TestChoices = {
   bigFive: boolean,
   myersBrigs: boolean,
@@ -120,34 +113,7 @@ export type TestChoices = {
   sixStyles: boolean
 };
 
-export type TestQuestionMap = {
-  bigFive: Array<FiveScaleQuestion>,
-  myersBrigs: Array<TwoMultipleChoiceQuestion>,
-  pen: Array<TrueFalseQuestion>,
 
-  fiveModern: Array<FiveMultipleChoiceQuestion>,
-  seduction: Array<FourMultipleChoiceQuestion>,
-  sixStyles: Array<FiveScaleQuestion>
-};
-
-export type TestQuestionList = Array<AllQuestionTypes>;
-
-export type TestTypeKeys = {
-  bigFive: TestType,
-  myersBrigs: TestType,
-  pen: TestType,
-  fiveModern: TestType,
-  seduction: TestType,
-  sixStyles: TestType
-};
-
-export interface TestState {
-  total: number,
-  answered: number,
-  currentQuestion: AllQuestionTypes | undefined
-}
-
-// NgRx
 export interface AppState {
   bigFive: Array<FiveScaleQuestion>;
   myersBrigs: Array<TwoMultipleChoiceQuestion>;

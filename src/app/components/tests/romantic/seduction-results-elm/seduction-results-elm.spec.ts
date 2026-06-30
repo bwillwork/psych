@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FiveScaleQuestionElm } from './five-scale-question-elm';
+import { SeductionResultsElm } from './seduction-results-elm';
 
-describe('FiveScaleQuestionElm', () => {
-  let component: FiveScaleQuestionElm;
-  let fixture: ComponentFixture<FiveScaleQuestionElm>;
+describe('SeductionResultsElm', () => {
+  let component: SeductionResultsElm;
+  let fixture: ComponentFixture<SeductionResultsElm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FiveScaleQuestionElm],
+      imports: [SeductionResultsElm],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FiveScaleQuestionElm);
+    fixture = TestBed.createComponent(SeductionResultsElm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

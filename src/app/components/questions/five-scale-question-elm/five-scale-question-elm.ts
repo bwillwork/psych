@@ -1,28 +1,24 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, output} from '@angular/core';
 import {
-  FiveMultipleChoiceAnswer, FourMultipleChoiceAnswer,
-  FourMultipleChoiceKeys,
-  FourMultipleChoiceQuestion
-} from '../../../../types/test.types';
+  FiveMultipleChoiceAnswer,
+  FiveScaleAnswer,
+  FiveScaleChoice,
+  FiveScaleQuestion
+} from '../../../types/test.types';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-four-multiple-choice-question-elm',
+  selector: 'app-five-scale-question-elm',
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './four-multiple-choice-question-elm.html',
-  styleUrl: './four-multiple-choice-question-elm.css',
+  templateUrl: './five-scale-question-elm.html',
+  styleUrl: './five-scale-question-elm.css',
 })
-export class FourMultipleChoiceQuestionElm implements OnInit, OnDestroy {
-  question = input.required<FourMultipleChoiceQuestion>();
-  responseKeys = computed(() => {
-    const q = this.question();
-    const keys = Object.keys(q.responses) as Array<FourMultipleChoiceKeys>;
-    return keys.sort();
-  });
+export class FiveScaleQuestionElm implements OnInit, OnDestroy {
+  question = input.required<FiveScaleQuestion>();
 
   private fb: FormBuilder = inject(FormBuilder);
   private subs: Array<Subscription> = [];
@@ -30,13 +26,13 @@ export class FourMultipleChoiceQuestionElm implements OnInit, OnDestroy {
   form = this.fb.group({
     radio: ['']
   });
-  onValueChange = output<FourMultipleChoiceAnswer>();
+  onValueChange = output<FiveScaleAnswer>();
 
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
       this.form.controls['radio'].reset(null,{emitEvent: false, onlySelf: true});
-      this.onValueChange.emit(formData.radio as FourMultipleChoiceAnswer);
+      this.onValueChange.emit(formData.radio as FiveScaleAnswer);
     }))
   }
 

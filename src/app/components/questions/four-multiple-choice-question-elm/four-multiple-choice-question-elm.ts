@@ -1,42 +1,42 @@
 import {Component, computed, inject, input, OnDestroy, OnInit, output} from '@angular/core';
 import {
-  FiveMultipleChoiceAnswer,
-  FiveMultipleChoiceKeys,
-  FiveMultipleChoiceQuestion
-} from '../../../../types/test.types';
+  FiveMultipleChoiceAnswer, FourMultipleChoiceAnswer,
+  FourMultipleChoiceKeys,
+  FourMultipleChoiceQuestion
+} from '../../../types/test.types';
 import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-five-multiple-choice-question-elm',
+  selector: 'app-four-multiple-choice-question-elm',
   imports: [
     ReactiveFormsModule
   ],
-  templateUrl: './five-multiple-choice-question-elm.html',
-  styleUrl: './five-multiple-choice-question-elm.css',
+  templateUrl: './four-multiple-choice-question-elm.html',
+  styleUrl: './four-multiple-choice-question-elm.css',
 })
-export class FiveMultipleChoiceQuestionElm implements OnInit, OnDestroy {
-
-  question = input.required<FiveMultipleChoiceQuestion>();
+export class FourMultipleChoiceQuestionElm implements OnInit, OnDestroy {
+  question = input.required<FourMultipleChoiceQuestion>();
   responseKeys = computed(() => {
     const q = this.question();
-    const keys = Object.keys(q.responses) as Array<FiveMultipleChoiceKeys>;
+    const keys = Object.keys(q.responses) as Array<FourMultipleChoiceKeys>;
     return keys.sort();
   });
 
   private fb: FormBuilder = inject(FormBuilder);
   private subs: Array<Subscription> = [];
+
   form = this.fb.group({
     radio: ['']
   });
-  onValueChange = output<FiveMultipleChoiceAnswer>();
+  onValueChange = output<FourMultipleChoiceAnswer>();
 
   ngOnInit(): void {
     this.subs.push(this.form.valueChanges.subscribe((formData) => {
       console.log('formData: ',formData);
       this.form.controls['radio'].reset(null,{emitEvent: false, onlySelf: true});
-      this.onValueChange.emit(formData.radio as FiveMultipleChoiceAnswer);
+      this.onValueChange.emit(formData.radio as FourMultipleChoiceAnswer);
     }))
   }
 
