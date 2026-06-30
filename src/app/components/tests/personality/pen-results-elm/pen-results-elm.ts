@@ -1,26 +1,5 @@
 import {Component, computed, input, Signal, signal, WritableSignal} from '@angular/core';
-import {PenTestResult} from '../../../../types/result.types';
-
-export type PenRanking = "Low" | "Mid" | "High" | "";
-export type PenSpectrum = {high: number, low: number};
-
-export type PenSpectrumScore = {
-  spectrum: PenSpectrum,
-  ranking: PenRanking,
-  description: string
-};
-
-export type PenSpectrumOptions = {
-  psychoticism: Array<PenSpectrumScore>,
-  extroversion: Array<PenSpectrumScore>,
-  neuroticism: Array<PenSpectrumScore>,
-};
-
-export type PenSpectrumEvaluation = {
-  psychoticism: PenSpectrumScore,
-  extroversion: PenSpectrumScore,
-  neuroticism: PenSpectrumScore,
-};
+import {PenSpectrum, PenSpectrumOptions, PenSpectrumScore, PenTestResult} from '../../../../types/result.types';
 
 const High: PenSpectrum = {high: 5, low: 4};
 const Mid: PenSpectrum = {high: 3, low: 2};

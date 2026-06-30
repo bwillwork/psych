@@ -22,11 +22,27 @@ export interface FiveModernRelationshipsResult {
   E: number
 }
 
+// PEN Personality test
 export interface PenTestResult {
   psychoticism: number,
   extroversion: number,
   neuroticism: number
 }
+
+export type PenRanking = "Low" | "Mid" | "High" | "";
+export type PenSpectrum = {high: number, low: number};
+
+export type PenSpectrumScore = {
+  spectrum: PenSpectrum,
+  ranking: PenRanking,
+  description: string
+};
+
+export type PenSpectrumOptions = {
+  psychoticism: Array<PenSpectrumScore>,
+  extroversion: Array<PenSpectrumScore>,
+  neuroticism: Array<PenSpectrumScore>,
+};
 
 // MyersBrigs
 export interface MyersBrigsResult {
