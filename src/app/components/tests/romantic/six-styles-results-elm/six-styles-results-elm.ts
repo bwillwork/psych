@@ -1,14 +1,5 @@
 import {Component, computed, input, signal, WritableSignal} from '@angular/core';
-import {SixStylesOfLovingResult} from '../../../../types/result.types';
-
-export type SixStylesOfLovingStyle = "eros" | "ludus" | "storge" | "pragma" | "mania" | "agape";
-export type SixStylesOfLovingSpectrum = {high: number, low: number};
-export type SixStylesOfLovingOption = {
-  style: SixStylesOfLovingStyle,
-  spectrum: SixStylesOfLovingSpectrum,
-  name: string,
-  description: string
-};
+import {SixStylesOfLovingOption, SixStylesOfLovingResult, SixStylesOfLovingStyle} from '../../../../types/result.types';
 
 @Component({
   selector: 'app-six-styles-results-elm',

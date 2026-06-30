@@ -10,19 +10,19 @@
 }
 @if(choices().pen) {
   <hr>
-  <app-pen-results-elm></app-pen-results-elm>
+  <app-pen-results-elm [result]="pen()"></app-pen-results-elm>
 }
 
 @if(choices().fiveModern) {
   <hr>
-  <app-five-modern-rel-results-elm></app-five-modern-rel-results-elm>
+  <app-five-modern-rel-results-elm [result]="fiveModern()"></app-five-modern-rel-results-elm>
 }
 @if(choices().seduction) {
   <hr>
-  <app-seduction-results-elm></app-seduction-results-elm>
+  <app-seduction-results-elm [result]="seduction()"></app-seduction-results-elm>
 }
 @if(choices().sixStyles) {
   <hr>
-  <app-six-styles-results-elm></app-six-styles-results-elm>
+  <app-six-styles-results-elm [result]="sixStyles()"></app-six-styles-results-elm>
 }
 

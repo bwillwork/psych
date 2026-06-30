@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FiveMultipleChoiceKeys, FourMultipleChoiceKeys} from './test.types';
 
+// Six Styles Of Loving
 export interface SixStylesOfLovingResult {
   eros: number,
   ludus: number,
@@ -9,6 +10,15 @@ export interface SixStylesOfLovingResult {
   mania: number,
   agape: number
 }
+
+export type SixStylesOfLovingStyle = "eros" | "ludus" | "storge" | "pragma" | "mania" | "agape";
+export type SixStylesOfLovingSpectrum = {high: number, low: number};
+export type SixStylesOfLovingOption = {
+  style: SixStylesOfLovingStyle,
+  spectrum: SixStylesOfLovingSpectrum,
+  name: string,
+  description: string
+};
 
 // Seduction Archetypes
 export interface SeductionArchetypesResult {

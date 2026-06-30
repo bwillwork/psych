@@ -68,3 +68,12 @@ export interface AppState {
 
   choices: TestChoices
 }
+
+export type TestTypeKeys = {
+  bigFive: "bigFive",
+  fiveModern: "fiveModern",
+  myersBrigs: "myersBrigs",
+  pen: "pen",
+  seduction: "seduction",
+  sixStyles: "sixStyles"
+};
