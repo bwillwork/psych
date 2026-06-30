@@ -8,6 +8,13 @@ import {
 } from '../../components/tests/romantic/five-modern-rel-results-elm/five-modern-rel-results-elm';
 import {SeductionResultsElm} from '../../components/tests/romantic/seduction-results-elm/seduction-results-elm';
 import {SixStylesResultsElm} from '../../components/tests/romantic/six-styles-results-elm/six-styles-results-elm';
+import {selectTestChoices} from '../../data/selectors/test.selectors';
+import {
+  selectBigFiveResult,
+  selectFiveModernRelResult,
+  selectMyersBrigsResult,
+  selectPenResult, selectSeductionResult, selectSixStylesResult
+} from '../../data/selectors/results.selectors';
 
 @Component({
   selector: 'app-results-page',
@@ -26,6 +33,14 @@ export class ResultsPage {
 
   private readonly store = inject(Store);
 
+  choices = this.store.selectSignal(selectTestChoices);
 
+  bigFive = this.store.selectSignal(selectBigFiveResult);
+  myersBrigs = this.store.selectSignal(selectMyersBrigsResult);
+  pen = this.store.selectSignal(selectPenResult);
+
+  fiveModern = this.store.selectSignal(selectFiveModernRelResult);
+  seduction = this.store.selectSignal(selectSeductionResult);
+  sixStyles = this.store.selectSignal(selectSixStylesResult);
 
 }

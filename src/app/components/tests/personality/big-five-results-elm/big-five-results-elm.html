@@ -1,1 +1,13 @@
-<p>big-five-results-elm works!</p>
+<h1>Big Five (OCEAN) Results</h1>
+
+@for (e of evaluation(); track $index) {
+  <h2>{{e.title}}</h2>
+  <h3>Your Score: {{e.score}}%</h3>
+  <h4>Evaluate your score</h4>
+  <p>
+    <b>High (70% - 100%): </b>{{getDescription(e.category,"High")}}
+  </p>
+  <p>
+    <b>Low (70% - 100%): </b>{{getDescription(e.category,"Low")}}
+  </p>
+}

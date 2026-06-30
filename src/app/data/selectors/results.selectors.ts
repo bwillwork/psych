@@ -1,11 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import {
   AllQuestionTypes,
-  AppState,
-  BigFiveResult,
-  FiveModernRelationshipsResult,
-  MyersBrigsResult,
-  PenTestResult, SeductionArchetypesResult, SixStylesOfLovingResult
+  AppState
 } from '../../types/test.types';
 import {selectIsFinished, selectTestChoices} from './test.selectors';
 import {
@@ -14,6 +10,13 @@ import {
   evaluateMyersBrigsTest,
   evaluatePenTest, evaluateSeductionTest, evaluateSixStylesOfLovingTest
 } from '../../util/results.util';
+import {
+  BigFiveResult,
+  FiveModernRelationshipsResult,
+  MyersBrigsResult,
+  PenTestResult,
+  SeductionArchetypesResult, SixStylesOfLovingResult
+} from '../../types/result.types';
 
 export const selectBigFiveTestData = (state: AppState) => state.bigFive;
 export const selectMyersBrigsTestData = (state: AppState) => state.myersBrigs;

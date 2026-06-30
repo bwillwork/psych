@@ -1,1 +1,5 @@
-<p>myers-brigs-results-elm works!</p>
+<h1>Myers-Brigs Personalty Test Result</h1>
+
+<h2>Your Personality Archetype is: {{evaluation().name}}</h2>
+<small><b>For more information on this archetype please visit: </b><a [href]="evaluation().url">16 Personalities ({{evaluation().name}})</a></small>
+<p>{{evaluation().description}}</p>

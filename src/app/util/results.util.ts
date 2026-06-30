@@ -1,20 +1,21 @@
 import {
-  BigFiveResult,
-  FiveModernRelationshipsResult,
   FiveMultipleChoiceAnswer,
   FiveMultipleChoiceQuestion,
   FiveScaleAnswer,
   FiveScaleQuestion,
   FourMultipleChoiceAnswer,
   FourMultipleChoiceQuestion,
-  MyersBrigsResult,
-  PenTestResult,
-  SeductionArchetypesResult,
-  SixStylesOfLovingResult,
   TrueFalseQuestion,
   TwoMultipleChoiceAnswer,
   TwoMultipleChoiceQuestion
 } from '../types/test.types';
+import {
+  BigFiveResult,
+  FiveModernRelationshipsResult,
+  MyersBrigsResult,
+  PenTestResult,
+  SeductionArchetypesResult, SixStylesOfLovingResult
+} from '../types/result.types';
 
 
 function _in<T>(array: Array<T>, elm: T) {
