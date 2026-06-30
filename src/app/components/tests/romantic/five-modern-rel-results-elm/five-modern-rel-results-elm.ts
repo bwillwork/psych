@@ -65,21 +65,14 @@ export class FiveModernRelResultsElm {
   result = input.required<FiveModernRelationshipsResult>();
   evaluation = computed(() => {
     const r = this.result();
-    let highestKey: FiveMultipleChoiceKeys = "A";
     const keys = Object.keys(r) as Array<FiveMultipleChoiceKeys>;
     const values = Object.values(r) as Array<number>;
-    const temp = {val:0,index:-1};
-    for(let v in values) {
-      const _v = parseInt(v);
-      const value = values[v];
 
-      if(temp.index === -1 || temp.val < value) {
-        temp.index = _v;
-        temp.val = value;
-      }
-    }
+    const top = values
+      .map((value,index) => ({value,index}))
+      .sort((a,b) => a.value - b.value)[0];
 
-    const key = keys[temp.index];
+    const key = keys[top.index];
     const archetype = map[key];
     return this.options().find(o => o.archetype === archetype) ?? defaultProfile;
 

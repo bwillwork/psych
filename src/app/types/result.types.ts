@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FiveMultipleChoiceKeys} from './test.types';
+import {FiveMultipleChoiceKeys, FourMultipleChoiceKeys} from './test.types';
 
 export interface SixStylesOfLovingResult {
   eros: number,
@@ -17,6 +17,19 @@ export interface SeductionArchetypesResult {
   C: number,
   D: number
 }
+
+export type SeductionArchetype = "Siren" | "Mother" | "Hunter" | "Mystic" | "";
+export type SeductionAnswerToArchetypeMap = {
+  [key in FourMultipleChoiceKeys]: SeductionArchetype;
+};
+export type SeductionArchetypeProfile = {
+  name: string,
+  archetype: SeductionArchetype,
+  energy: string,
+  style: string,
+  shadow: string
+};
+
 
 // The Five Modern Relationship Archetypes
 export interface FiveModernRelationshipsResult {
