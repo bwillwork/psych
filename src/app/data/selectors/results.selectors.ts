@@ -46,7 +46,7 @@ export const selectMyersBrigsResult = createSelector(
   selectTestChoices,
   selectIsFinished,
   (questions,choices,isFinished): MyersBrigsResult => {
-    if(isFinished && choices.bigFive) {
+    if(isFinished && choices.myersBrigs) {
       return evaluateMyersBrigsTest(questions);
     } else {
       return {
@@ -64,7 +64,7 @@ export const selectPenResult = createSelector(
   selectTestChoices,
   selectIsFinished,
   (questions,choices,isFinished): PenTestResult => {
-    if(isFinished && choices.bigFive) {
+    if(isFinished && choices.pen) {
       return evaluatePenTest(questions);
     } else {
       return {extroversion: 0, neuroticism: 0, psychoticism: 0};
@@ -78,7 +78,7 @@ export const selectFiveModernRelResult = createSelector(
   selectTestChoices,
   selectIsFinished,
   (questions,choices,isFinished): FiveModernRelationshipsResult => {
-    if(isFinished && choices.bigFive) {
+    if(isFinished && choices.fiveModern) {
       return evaluateFiveModernTest(questions);
     } else {
       return {A: 0, B: 0, C: 0, D: 0, E: 0};
@@ -91,7 +91,7 @@ export const selectSeductionResult = createSelector(
   selectTestChoices,
   selectIsFinished,
   (questions,choices,isFinished): SeductionArchetypesResult => {
-    if(isFinished && choices.bigFive) {
+    if(isFinished && choices.seduction) {
       return evaluateSeductionTest(questions);
     } else {
       return {A: 0, B: 0, C: 0, D: 0};
@@ -104,7 +104,7 @@ export const selectSixStylesResult = createSelector(
   selectTestChoices,
   selectIsFinished,
   (questions,choices,isFinished): SixStylesOfLovingResult => {
-    if(isFinished && choices.bigFive) {
+    if(isFinished && choices.sixStyles) {
       return evaluateSixStylesOfLovingTest(questions);
     } else {
       return {agape: 0, eros: 0, ludus: 0, mania: 0, pragma: 0, storage: 0};

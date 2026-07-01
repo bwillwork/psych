@@ -7,10 +7,11 @@ export const initialState = initTestChoices();
 export const testChoicesReducer = createReducer(
   initialState,
   on(choose, (state,{choices}) => {
-    console.log({...state,...choices});
+    console.log('choices: ',{...state,...choices});
     return {...state,...choices};
   }),
   on(reset, () => {
+    console.log('reset');
     return initTestChoices()
   }),
 );

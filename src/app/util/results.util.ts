@@ -91,6 +91,7 @@ export function evaluatePenTest(questions: Array<TrueFalseQuestion>): PenTestRes
       const expectedAnswer = expectedAnswers[idIndex];
       if(question.answer === expectedAnswer) result += 1;
     }
+    console.log('result: ',result);
     return result;
   }
 

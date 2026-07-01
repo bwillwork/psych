@@ -53,7 +53,7 @@ export class BigFiveResultsElm {
     {
       description: `You are highly social, talkative, assertive, and draw energy from being around others. You thrive in high-stimulation environments.`,
       spectrum: High,
-      category: "Openness",
+      category: "Extroversion",
       ranking: "High"
     },
     {
@@ -127,7 +127,8 @@ export class BigFiveResultsElm {
 
 
   public getDescription(category: BigFiveCategory, ranking: BigFiveRanking) {
-    return this.descriptions().find(d => d.category === category && d.ranking === ranking);
+    const d = this.descriptions().find(d => d.category === category && d.ranking === ranking);
+    return (d) ? d.description : "";
   }
 
 }

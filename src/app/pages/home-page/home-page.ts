@@ -6,6 +6,14 @@ import {Store} from '@ngrx/store';
 import {selectHasStartedTest} from '../../data/selectors/test.selectors';
 import {choose, reset} from '../../data/actions/testChoice.actions';
 
+import * as bigFiveActions from '../../data/actions/personality/bigFive.actions';
+import * as myersBrigsActions from '../../data/actions/personality/myersBrigs.actions';
+import * as penActions from '../../data/actions/personality/pen.actions';
+
+import * as fiveModernRelActions from '../../data/actions/romantic/fiveModernRel.actions';
+import * as seductionActions from '../../data/actions/romantic/seduction.actions';
+import * as sixStylesActions from '../../data/actions/romantic/sixStyles.actions';
+
 @Component({
   selector: 'app-home-page',
   imports: [
@@ -39,6 +47,14 @@ export class HomePage {
 
   no() {
     //this.testChoiceService.resetTestChoices();
+    this.store.dispatch(bigFiveActions.resetQuestions());
+    this.store.dispatch(myersBrigsActions.resetQuestions());
+    this.store.dispatch(penActions.resetQuestions());
+
+    this.store.dispatch(fiveModernRelActions.resetQuestions());
+    this.store.dispatch(seductionActions.resetQuestions());
+    this.store.dispatch(sixStylesActions.resetQuestions());
+
     this.store.dispatch(reset());
   }
 

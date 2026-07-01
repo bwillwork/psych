@@ -66,7 +66,7 @@ export const selectHasStartedTest = createSelector(
     const result = values.reduce((agg,val) => {
       return agg || val;
     },false);
-    console.log(choices,result);
+    console.log('has started: ',choices,result);
     return result;
   }
 );
