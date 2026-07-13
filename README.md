@@ -1,4 +1,7 @@
 # Psych
+
+## **Note:** This is still a work in progress
+
 This is a fun project for those interested in personality tests.  It combines six popular personality tests for general personality and romance.
 1. Big 5 Personality Test
 2. Myers Brigs Personality Test
