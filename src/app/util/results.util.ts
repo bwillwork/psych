@@ -36,7 +36,7 @@ export function evaluateBigFiveTest(questions: Array<FiveScaleQuestion>): BigFiv
   }
 
   function reverseScore(question: FiveScaleQuestion): FiveScaleQuestion {
-    const answer = ((question.answer) ? 5 - question.answer : 0) as FiveScaleAnswer;// Reverse the score
+    const answer = ((question.answer) ? 6 - question.answer : 0) as FiveScaleAnswer;// Reverse the score
     return {...question,answer};
   }
 
