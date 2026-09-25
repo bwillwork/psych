@@ -32,10 +32,7 @@
           },
           "configurations": {
             "production": {
-              "outputPath": {
-                "base": "dist",
-                "browser": ""
-              },
+              "outputPath": "dist",
               "budgets": [
                 {
                   "type": "initial",
