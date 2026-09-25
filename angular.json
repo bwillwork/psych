@@ -33,7 +33,7 @@
           "configurations": {
             "production": {
               "outputPath": {
-                "base": "dist/cloudflare",
+                "base": "dist",
                 "browser": ""
               },
               "budgets": [
