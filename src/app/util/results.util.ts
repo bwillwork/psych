@@ -75,9 +75,9 @@ export function evaluateMyersBrigsTest(questions: Array<TwoMultipleChoiceQuestio
   }
 
   return {
-    decisions: {feeling: addUpBs(questions,[11,12,13,14,15]), thinking: addUpAs(questions,[11,12,13,14,15])},
     energy: {extroversion: addUpAs(questions,[1,2,3,4,5]), introversion: addUpBs(questions,[1,2,3,4,5])},
     information: {intuition: addUpBs(questions,[6,7,8,9,10]), sensing: addUpAs(questions,[6,7,8,9,10])},
+    decisions: {feeling: addUpBs(questions,[11,12,13,14,15]), thinking: addUpAs(questions,[11,12,13,14,15])},
     lifestyle: {judging: addUpAs(questions,[16,17,18,19,20]), perceiving: addUpBs(questions,[16,17,18,19,20])}
   };
 }
@@ -91,7 +91,6 @@ export function evaluatePenTest(questions: Array<TrueFalseQuestion>): PenTestRes
       const expectedAnswer = expectedAnswers[idIndex];
       if(question.answer === expectedAnswer) result += 1;
     }
-    console.log('result: ',result);
     return result;
   }
 
@@ -146,6 +145,16 @@ export function evaluateSixStylesOfLovingTest(questions: Array<FiveScaleQuestion
   }
 
   return {
+    eros: addScores(questions,[1,2,3,4,5,6,7]),
+    ludus: addScores(questions,[8,9,10,11,12,13,14]),
+    storge: addScores(questions,[15,16,17,18,19,20,21]),
+    pragma: addScores(questions,[22,23,24,25,26,27,28]),
+    mania: addScores(questions,[29,30,31,32,33,34,35]),
+    agape: addScores(questions,[36,37,38,39,40,41,42]),
+  };
+
+  /*
+  return {
     eros: addScores(questions,[1,7,13]),
     ludus: addScores(questions,[2,8,14]),
     storage: addScores(questions,[3,9,15]),
@@ -153,4 +162,6 @@ export function evaluateSixStylesOfLovingTest(questions: Array<FiveScaleQuestion
     mania: addScores(questions,[5,11,17]),
     agape: addScores(questions,[6,12,18]),
   };
+
+   */
 }

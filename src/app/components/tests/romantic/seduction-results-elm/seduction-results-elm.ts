@@ -67,7 +67,7 @@ export class SeductionResultsElm {
     const values = Object.values(r) as Array<number>;
     const temp = values
       .map((value,index) => ({value,index}))
-      .sort((a, b) => a.value - b.value);
+      .sort((a, b) => b.value - a.value);
     const top = temp[0];
     const second = temp[1];
 

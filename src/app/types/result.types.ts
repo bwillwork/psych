@@ -5,7 +5,7 @@ import {FiveMultipleChoiceKeys, FourMultipleChoiceKeys} from './test.types';
 export interface SixStylesOfLovingResult {
   eros: number,
   ludus: number,
-  storage: number,
+  storge: number,
   pragma: number,
   mania: number,
   agape: number
