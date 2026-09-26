@@ -107,7 +107,7 @@ export const selectSixStylesResult = createSelector(
     if(isFinished && choices.sixStyles) {
       return evaluateSixStylesOfLovingTest(questions);
     } else {
-      return {agape: 0, eros: 0, ludus: 0, mania: 0, pragma: 0, storage: 0};
+      return {agape: 0, eros: 0, ludus: 0, mania: 0, pragma: 0, storge: 0};
     }
   }
 );
